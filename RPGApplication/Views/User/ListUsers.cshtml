@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ListUsers";
+    List<RPGApplication.Models.User> userList = ViewBag.Users;
+}
+
+
+<table class="table">
+    <thead class="thead-dark text-center">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Login</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">Conta ativa</th>
+            <th scope="col">Data de registro</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var user in userList)
+        {
+            <tr>
+                <th scope="row">@user.UserId</th>
+                <td>@user.Login</td>
+                <td>@user.Email</td>
+                <td>@user.Name</td>
+                <td>@user.LastName</td>
+                <td>@user.ActiveAccount</td>
+                <td>@user.SignUpDate</td>
+                <td>@Html.ActionLink( "Editar", "Edit", "User", new { id = user.UserId}, null)</td>
+                <td>@Html.ActionLink( "Desabilitar", "DisableOrEnable", "User", new { id = user.UserId }, null)</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
