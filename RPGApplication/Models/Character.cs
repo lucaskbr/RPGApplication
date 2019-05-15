@@ -14,7 +14,7 @@ namespace RPGApplication.Models
         [Key]
         public int CharacterId { get; set; }
         public string Name { get; set; }
-        public int Life { get; set; }
+        public int LifePoints { get; set; }
         public int Energy { get; set; }
         public int Level { get; set; }
         public double Experience { get; set; }
@@ -28,6 +28,8 @@ namespace RPGApplication.Models
         public Character(string name)
         {
             this.Name = name;
+            this.LifePoints = 5;
+
         }
 
        /* public void MakeAnAttack() {

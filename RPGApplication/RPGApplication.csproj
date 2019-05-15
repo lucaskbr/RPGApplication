@@ -45,6 +45,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -129,16 +137,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AttributeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\AttributeDAO.cs" />
     <Compile Include="DAL\CharacterDAO.cs" />
     <Compile Include="DAL\ContextSingleton.cs" />
     <Compile Include="DAL\UserDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905150308506_attBanco.cs" />
+    <Compile Include="Migrations\201905150308506_attBanco.Designer.cs">
+      <DependentUpon>201905150308506_attBanco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Armour.cs" />
     <Compile Include="Models\Attack.cs" />
-    <Compile Include="Models\Attribute.cs" />
     <Compile Include="Models\AttributeInCharacter.cs" />
     <Compile Include="Models\Bag.cs" />
     <Compile Include="Models\Character.cs" />
@@ -148,6 +162,7 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemRarity.cs" />
     <Compile Include="Models\ItemType.cs" />
+    <Compile Include="Models\Proficiency.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -164,6 +179,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\ListUsers.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Attribute\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,6 +192,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201905150308506_attBanco.resx">
+      <DependentUpon>201905150308506_attBanco.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

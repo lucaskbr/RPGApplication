@@ -7,20 +7,23 @@ using System.Web;
 
 namespace RPGApplication.Models
 {
-    [Table("attribute")]
-    public class Attribute
+    [Table("Proficiency")]
+    public class Proficiency
     {
 
+
         [Key]
-        public int AttributeId { get; set; }
+        public int ProficiencyId { get; set; }
         public string Name { get; set; }
 
-        public Attribute() { }
+        public Proficiency() { }
 
-        public Attribute(string name)
+        public Proficiency(string name)
         {
             this.Name = name;
         }
+
+
 
 
     }

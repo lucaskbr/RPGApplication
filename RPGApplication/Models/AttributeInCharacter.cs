@@ -12,16 +12,16 @@ namespace RPGApplication.Models
     {
         [Key]
         public int AttributeInCharacterId { get; set; }
-        public Attribute Attribute { get; set; }
-        public int AttributePoints { get; set; }
+        public Proficiency Proficiency { get; set; }
+        public int ProficiencyPoints { get; set; }
 
 
         public AttributeInCharacter() { }
 
-        public AttributeInCharacter(Attribute attribute, int attributePoints)
+        public AttributeInCharacter(Proficiency proficiency, int proficiencyPoints)
         {
-            this.Attribute = attribute;
-            this.AttributePoints = attributePoints;
+            this.Proficiency = proficiency;
+            this.ProficiencyPoints = proficiencyPoints;
         }
 
 
