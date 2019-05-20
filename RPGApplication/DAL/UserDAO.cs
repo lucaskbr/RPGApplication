@@ -11,9 +11,43 @@ namespace RPGApplication.DAL
 
         private static Context ctx = ContextSingleton.GetInstance();
 
+
+        public static User Get(int? id)
+        {
+            if (id != null)
+            {
+                return ctx.Users.Find(id);
+            }
+            return null;
+        }
+
+        public static List<User> GetAll()
+        {
+            List<User> userList = new List<User>();
+
+            try {
+                userList = ctx.Users.ToList();
+            }
+            catch (Exception e) {
+
+            }
+            return userList;
+        }
+
+        public static List<User> GetAllUsersActives()
+        {
+            return ctx.Users.Where(x => x.ActiveAccount == true).ToList();
+        }
+
+        public static User GetByLogin(User user)
+        {
+            return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login));
+        }
+
+
         public static bool Save(User user)
         {
-            if (GetUserByLogin(user) == null)
+            if (GetByLogin(user) == null)
             {
                 ctx.Users.Add(user);
                 ctx.SaveChanges();
@@ -31,34 +65,10 @@ namespace RPGApplication.DAL
 
         public static void DisableOrEnable(User user)
         {
-            user = GetUserById(user.UserId);
+            user = Get(user.UserId);
             user.ActiveAccount = !user.ActiveAccount;
             ctx.SaveChanges();
         }
-
-        public static List<User> GetAll()
-        {
-            return ctx.Users.ToList();
-        }
-
-        public static List<User> GetAllUsersActives()
-        {
-            return ctx.Users.Where(x => x.ActiveAccount == true).ToList();
-        }
-
-        public static User GetUserById(int? id)
-        {
-            if (id != null)
-            {
-                return ctx.Users.Find(id);
-            }
-            return null;
-        }
-
-        public static User GetUserByLogin(User user)
-        {
-            return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login));
-        }
-
+        
     }
 }

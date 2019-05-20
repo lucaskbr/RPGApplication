@@ -12,6 +12,11 @@ namespace RPGApplication.Models
     {
         [Key]
         public int RarityId { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Nome:")]
+        [MinLength(5)]
+        [MaxLength(15)]
         public string Name { get; set; }
 
         public ItemRarity() { }

@@ -12,19 +12,20 @@ namespace RPGApplication.Models
     {
         [Key]
         public int AttackId { get; set; }
+
+        [Required]
         public Character Attacker { get; set; }
-        public Character Attacked { get; set; }
+
+        [Required]
         public int DamageDone { get; set; }
-        public bool Dodged { get; set; }
+
 
         public Attack() { }
 
 
-        public Attack(Character attacker, Character attacked, int damageDone, bool dodged) {
+        public Attack(Character attacker, int damageDone) {
             this.Attacker = attacker;
-            this.Attacked = attacked;
             this.DamageDone = damageDone;
-            this.Dodged = dodged;
         }
 
 

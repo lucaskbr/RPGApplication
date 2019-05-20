@@ -12,13 +12,16 @@ namespace RPGApplication.Models
     {
         [Key]
         public int BagId { get; set; }
-        public int slots { get; set; }
-        public List<Item> Itens { get; set; }
 
+        [Required]
+        public int slots { get; set; }
+
+        public List<Item> Items { get; set; }
+         
 
         public Bag()
         {
-            this.slots = 2;
+            this.slots = 5;
         }
 
         public void CheckIfExistsEmptySlotsInBag()

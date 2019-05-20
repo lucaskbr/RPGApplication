@@ -12,13 +12,29 @@ namespace RPGApplication.Models
     {
         [Key]
         public int ItemId { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Nome:")]
+        [MinLength(1)]
+        [MaxLength(50)]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Descrição:")]
+        [MaxLength(150)]
         public string Description { get; set; }
-        /*public ItemType ItemType { get; set; }*/
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Nível do item:")]
         public int RequiredLevel { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Preço:")]
         public int Price { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "Raridade do item:")]
         public ItemRarity ItemRarity { get; set; }
-        /* public Modifier Modifier { get; set; }*/
 
 
         public Item() { }

@@ -7,13 +7,16 @@ using System.Web;
 
 namespace RPGApplication.Models
 {
-    [Table("Proficiency")]
+    [Table("attributeInCharacter")]
     public class Proficiency
     {
 
 
         [Key]
         public int ProficiencyId { get; set; }
+
+        [Required]
+        [MaxLength(15)]
         public string Name { get; set; }
 
         public Proficiency() { }

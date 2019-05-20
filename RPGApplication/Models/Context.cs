@@ -15,11 +15,15 @@ namespace RPGApplication.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Character> Characters { get; set; }
-        public DbSet<Attribute> Attributes { get; set; }
+        public DbSet<Proficiency> Proficiencys { get; set; }
         public DbSet<AttributeInCharacter> AttributeInCharacters { get; set; }
         public DbSet<Bag> Bags { get; set; }
-        public DbSet<Coin> Coins { get; set; }
-
+        public DbSet<Item> Items { get; set; }
+        public DbSet<ItemRarity> ItensRarity { get; set; }
+        public DbSet<Weapon> Weapons { get; set; }
+        public DbSet<Armour> Armours { get; set; }
+        public DbSet<Combat> Combats { get; set; }
+        public DbSet<Attack> Attacks { get; set; }
 
 
     }

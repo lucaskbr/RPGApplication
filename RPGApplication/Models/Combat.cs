@@ -12,9 +12,13 @@ namespace RPGApplication.Models
     {
         [Key]
         public int CombatId { get; set; }
+
         public Character CharacterOne { get; set; }
+
         public Character CharacterTwo { get; set; }
+
         public List<Attack> Attacks { get; set; }
+
         public Character Winner { get; set; }
 
 
