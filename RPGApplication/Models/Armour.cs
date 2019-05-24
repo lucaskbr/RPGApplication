@@ -19,6 +19,9 @@ namespace RPGApplication.Models
         public double Evasion { get; set; }
 
 
+
+        public Armour() : base() { }
+
         public Armour(string name, string description, int requiredLevel, int price, ItemRarity itemRarity, int defense, double evasion)
             : base(name, description, requiredLevel, price, itemRarity)
         {

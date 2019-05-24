@@ -13,7 +13,7 @@ namespace RPGApplication.Controllers
 {
     public class UsersController : Controller
     {
-        private Context db = new Context();
+        //private Context db = new Context();
 
         // GET: Users
         public ActionResult Index()
@@ -53,9 +53,7 @@ namespace RPGApplication.Controllers
             user.Character = CreateAnCharacterToUser(user);
 
 
-            ModelState.SetModelValue("Character", new ValueProviderResult(user.Character, "Character"));
-            
-
+           
 
             if (ModelState.IsValid)
             {
@@ -75,6 +73,7 @@ namespace RPGApplication.Controllers
         }
 
         private Character CreateAnCharacterToUser(User user) {
+
             Bag bag = new Bag();
             List<AttributeInCharacter> attributesInCharacter = new List<AttributeInCharacter>();
 
@@ -85,7 +84,7 @@ namespace RPGApplication.Controllers
             }
 
             Character character = new Character(user.Login, attributesInCharacter, bag);
-
+            character.Imagem =  System.IO.Path.Combine(Server.MapPath("~/Images/"), "Default.jpg");
             return character;
 
         }
@@ -116,7 +115,16 @@ namespace RPGApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserDAO.Update(user);
+                /*UserDAO.Update(user);*/
+
+                User userInDataBase = UserDAO.Get(user.UserId);
+                userInDataBase.Name = user.Name;
+                userInDataBase.LastName = user.LastName;
+                user.UserAcess = user.UserAcess;
+                user.ActiveAccount = user.ActiveAccount;
+
+                UserDAO.Update(userInDataBase);
+
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -148,7 +156,7 @@ namespace RPGApplication.Controllers
             db.SaveChanges();*/
             return RedirectToAction("Index");
         }
-
+        /*
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -156,6 +164,6 @@ namespace RPGApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

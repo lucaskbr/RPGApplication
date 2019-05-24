@@ -9,9 +9,7 @@ namespace RPGApplication.Models
     public class Context : DbContext
     {
 
-
-        public Context() : base("RPGAPPLICATION") { }
-
+        
 
         public DbSet<User> Users { get; set; }
         public DbSet<Character> Characters { get; set; }
@@ -19,11 +17,15 @@ namespace RPGApplication.Models
         public DbSet<AttributeInCharacter> AttributeInCharacters { get; set; }
         public DbSet<Bag> Bags { get; set; }
         public DbSet<Item> Items { get; set; }
-        public DbSet<ItemRarity> ItensRarity { get; set; }
+        public DbSet<ItemRarity> ItemsRarity { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Armour> Armours { get; set; }
         public DbSet<Combat> Combats { get; set; }
         public DbSet<Attack> Attacks { get; set; }
+
+
+
+        public Context() : base("RPGAPPLICATION") { }
 
 
     }

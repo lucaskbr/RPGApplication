@@ -14,6 +14,9 @@ namespace RPGApplication.Models
         [Key]
         public int CharacterId { get; set; }
 
+        [Display(Name = "Imagem:")]
+        public string Imagem { get; set; }
+
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Nome:")]
         [MinLength(5, ErrorMessage = "O campo deve ser preenchido com no minimo 5 caracteres")]
@@ -52,6 +55,11 @@ namespace RPGApplication.Models
         public int RankingPoints { get; set; }
 
 
+        public Character()
+        {
+            
+        }
+
         public Character(string name, List<AttributeInCharacter> attributesInCharacter, Bag bag)
         {
             this.Name = name;
@@ -59,6 +67,7 @@ namespace RPGApplication.Models
             this.Level = 1;
             this.Experience = 0;
             this.AttributesInCharacter = attributesInCharacter;
+            EquipedItems = new List<Item>();
             this.Bag = bag;
             this.Coins = 100;
             this.RankingPoints = -1;

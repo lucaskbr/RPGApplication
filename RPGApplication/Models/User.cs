@@ -49,6 +49,7 @@ namespace RPGApplication.Models
         public Character Character { get; set; }
 
         [Required]
+        [Range(0,1, ErrorMessage = "O campo só pode conter o valor 0 ou 1")]
         public int UserAcess { get; set; }
 
         [Required]

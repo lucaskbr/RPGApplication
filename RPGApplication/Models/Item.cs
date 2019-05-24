@@ -22,6 +22,7 @@ namespace RPGApplication.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Descrição:")]
         [MaxLength(150)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]

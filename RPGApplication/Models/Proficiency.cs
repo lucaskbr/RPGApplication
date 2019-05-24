@@ -7,7 +7,7 @@ using System.Web;
 
 namespace RPGApplication.Models
 {
-    [Table("attributeInCharacter")]
+    [Table("Proficiency")]
     public class Proficiency
     {
 

@@ -21,6 +21,12 @@ namespace RPGApplication.DAL
             return null;
         }
 
+
+        public static User GetByLogin(User user)
+        {
+            return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login));
+        }
+
         public static List<User> GetAll()
         {
             List<User> userList = new List<User>();
@@ -39,12 +45,7 @@ namespace RPGApplication.DAL
             return ctx.Users.Where(x => x.ActiveAccount == true).ToList();
         }
 
-        public static User GetByLogin(User user)
-        {
-            return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login));
-        }
-
-
+        
         public static bool Save(User user)
         {
             if (GetByLogin(user) == null)

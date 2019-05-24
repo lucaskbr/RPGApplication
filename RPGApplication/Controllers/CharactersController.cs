@@ -13,14 +13,14 @@ namespace RPGApplication.Controllers
 {
     public class CharactersController : Controller
     {
-        private Context db = new Context();
+       // private Context db = new Context();
 
         // GET: Characters
         public ActionResult Index()
         {
             return View(CharacterDAO.GetAll());
         }
-
+        /*
         // GET: Characters/Details/5
         public ActionResult Details(int? id)
         {
@@ -54,7 +54,7 @@ namespace RPGApplication.Controllers
             if (ModelState.IsValid)
             {
                 /*db.Characters.Add(character);
-                db.SaveChanges();*/
+                db.SaveChanges();
                 CharacterDAO.Save(character);
                 return RedirectToAction("Index");
             }
@@ -92,7 +92,7 @@ namespace RPGApplication.Controllers
             }
             return View(character);
         }
-
+        */
         // GET: Characters/Delete/5
         /* public ActionResult Delete(int? id)
          {

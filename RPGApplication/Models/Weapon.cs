@@ -18,6 +18,8 @@ namespace RPGApplication.Models
         [Display(Name = "Crítico:")]
         public double Critical { get; set; }
 
+        public Weapon() : base() { }
+
         public Weapon(string name, string description, int requiredLevel, int price, ItemRarity itemRarity, int damage, double critical)
             : base(name, description, requiredLevel, price, itemRarity)
         {

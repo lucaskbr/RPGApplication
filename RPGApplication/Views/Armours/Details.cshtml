@@ -1,0 +1,66 @@
+﻿@model RPGApplication.Models.Armour
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Armour</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequiredLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Defense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Defense)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Evasion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evasion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
