@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RPGApplication.Models;
 using RPGApplication.DAL;
+using RPGApplication.Utils;
 
 namespace RPGApplication.Controllers
 {
@@ -39,6 +40,7 @@ namespace RPGApplication.Controllers
         // GET: Weapons/Create
         public ActionResult Create()
         {
+            ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View();
         }
 
@@ -47,14 +49,35 @@ namespace RPGApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,Name,Deion,RequiredLevel,Price,Damage,Critical")] Weapon weapon)
+        public ActionResult Create(HttpPostedFileBase image, [Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,ItemRarity,Damage,Critical")] Weapon weapon)
         {
+
+            weapon.ItemRarity = ItemRarityDAO.Get(weapon.ItemRarity.ItemRarityId);
+
             if (ModelState.IsValid)
             {
+
+                if (image != null)
+                {
+
+                    string newImageName = FileUploadHandling.RenameFile(image, weapon.Name);
+                    FileUploadHandling.SaveFile(image, newImageName, "Weapons");
+                    weapon.Image = "Weapons/" + newImageName;
+                }
+                else
+                {
+                    weapon.Image = "Weapons/default.jpg";
+                }
+
                 WeaponDAO.Save(weapon);
                 return RedirectToAction("Index");
             }
 
+            if (weapon.ItemRarity == null) {
+                ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
+            }
+
+            ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(weapon);
         }
 
@@ -70,6 +93,8 @@ namespace RPGApplication.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(weapon);
         }
 
@@ -78,8 +103,11 @@ namespace RPGApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemId,Name,Deion,RequiredLevel,Price,Damage,Critical")] Weapon weapon)
+        public ActionResult Edit([Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,ItemRarity,Damage,Critical")] Weapon weapon)
         {
+
+            weapon.ItemRarity = ItemRarityDAO.Get(weapon.ItemRarity.ItemRarityId);
+
             if (ModelState.IsValid)
             {
 
@@ -96,6 +124,13 @@ namespace RPGApplication.Controllers
 
                 return RedirectToAction("Index");
             }
+
+            if (weapon.ItemRarity == null)
+            {
+                ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
+            }
+
+            ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(weapon);
         }
 
@@ -120,6 +155,7 @@ namespace RPGApplication.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Weapon weapon = WeaponDAO.Get(id);
+            FileUploadHandling.RemoveFile(weapon.Image);
             WeaponDAO.Remove(weapon);
             return RedirectToAction("Index");
         }

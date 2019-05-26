@@ -6,58 +6,86 @@
 
 <h2>Index</h2>
 
-<p>
+<button class="btn btn-dark my-3">
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RequiredLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Defense)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Evasion)
-        </th>
-        <th></th>
-    </tr>
+</button>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RequiredLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Defense)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Evasion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemId })
-        </td>
-    </tr>
-}
-
+<table class="table table-striped table-dark text-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequiredLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Defense)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Evasion)
+            </th>
+            <th scope="col">
+                Editar
+            </th>
+            <th scope="col">
+                Detalhes
+            </th>
+            <th scope="col">
+                Excluir
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="~/Images/@item.Image" ) class="img-fluid table-img" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequiredLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Defense)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evasion)
+                </td>
+                <td>
+                    <a href=@Url.Action("Edit", "Armours", new { id = item.ItemId})>
+                        <i class="fas fa-edit text-white font-19"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href=@Url.Action("Details", "Armours", new { id = item.ItemId})>
+                        <i class="fas fa-search text-white font-19"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href=@Url.Action("Delete", "Armours", new { id = item.ItemId})>
+                        <i class="fas fa-trash-alt text-white font-19"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

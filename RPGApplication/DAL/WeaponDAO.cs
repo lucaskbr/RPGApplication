@@ -73,6 +73,8 @@ namespace RPGApplication.DAL
         public static void Remove(Weapon weapon)
         {
             ctx.Weapons.Remove(weapon);
+            ctx.SaveChanges();
         }
+
     }
 }

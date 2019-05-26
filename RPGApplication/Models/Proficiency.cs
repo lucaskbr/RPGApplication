@@ -13,10 +13,12 @@ namespace RPGApplication.Models
 
 
         [Key]
+        [Display(Name = "ID")]
         public int ProficiencyId { get; set; }
 
         [Required]
-        [MaxLength(15)]
+        [Display(Name = "Proficiencia")]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         public Proficiency() { }

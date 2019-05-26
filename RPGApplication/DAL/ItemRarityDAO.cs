@@ -49,6 +49,8 @@ namespace RPGApplication.DAL
 
         public static bool Save(ItemRarity itemRarity)
         {
+            itemRarity.Name = itemRarity.Name.ToUpper();
+
             if (GetByName(itemRarity) == null)
             {
                 ctx.ItemsRarity.Add(itemRarity);
@@ -60,16 +62,24 @@ namespace RPGApplication.DAL
 
         }
 
-        public static void Update(ItemRarity itemRarity)
+        public static bool Update(ItemRarity itemRarity)
         {
-            ctx.Entry(itemRarity).State = System.Data.Entity.EntityState.Modified;
-            ctx.SaveChanges();
+            itemRarity.Name = itemRarity.Name.ToUpper();
+
+            if(GetByName(itemRarity) == null) {
+                ctx.Entry(itemRarity).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
 
 
         public static void Remove(ItemRarity itemRarity)
         {
             ctx.ItemsRarity.Remove(itemRarity);
+            ctx.SaveChanges();
         }
 
 

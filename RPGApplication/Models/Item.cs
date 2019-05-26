@@ -11,6 +11,7 @@ namespace RPGApplication.Models
     public class Item
     {
         [Key]
+        [Display(Name = "ID:")]
         public int ItemId { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
@@ -19,6 +20,9 @@ namespace RPGApplication.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [Display(Name = "Imagem:")]
+        public string Image { get; set; }
+
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Descrição:")]
         [MaxLength(150)]
@@ -26,15 +30,13 @@ namespace RPGApplication.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Nível do item:")]
+        [Display(Name = "Nível:")]
         public int RequiredLevel { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Preço:")]
         public int Price { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Raridade do item:")]
         public ItemRarity ItemRarity { get; set; }
 
 

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RPGApplication.Models;
 using RPGApplication.DAL;
+using RPGApplication.Utils;
 
 namespace RPGApplication.Controllers
 {
@@ -47,17 +48,35 @@ namespace RPGApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,ItemRarity,Defense,Evasion")] Armour armour)
+        public ActionResult Create(HttpPostedFileBase image, [Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,ItemRarity,Defense,Evasion")] Armour armour)
         {
         
             armour.ItemRarity = ItemRarityDAO.Get(armour.ItemRarity.ItemRarityId);
 
-          
             if (ModelState.IsValid)
             {
+
+                if (image != null)
+                {
+
+                    string newImageName = FileUploadHandling.RenameFile(image, armour.Name);
+                    FileUploadHandling.SaveFile(image, newImageName, "Armours");
+                    armour.Image = "Armours/" + newImageName;
+                }
+                else
+                {
+                    armour.Image = "Armours/default.jpg";
+                }
+
                 ArmourDAO.Save(armour);
                 return RedirectToAction("Index");
             }
+
+            if (armour.ItemRarity == null)
+            {
+                ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
+            }
+
             ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(armour);
         }
@@ -74,6 +93,7 @@ namespace RPGApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(armour);
         }
 
@@ -82,10 +102,14 @@ namespace RPGApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,Defense,Evasion")] Armour armour)
+        public ActionResult Edit([Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,ItemRarity,Defense,Evasion")] Armour armour)
         {
+
+            armour.ItemRarity = ItemRarityDAO.Get(armour.ItemRarity.ItemRarityId);
+
             if (ModelState.IsValid)
             {
+                
                 Armour armourInDataBase = ArmourDAO.Get(armour.ItemId);
 
                 armourInDataBase.Name = armour.Name;
@@ -100,6 +124,13 @@ namespace RPGApplication.Controllers
 
                 return RedirectToAction("Index");
             }
+
+            if (armour.ItemRarity == null)
+            {
+                ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
+            }
+
+            ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(armour);
         }
 
@@ -124,18 +155,19 @@ namespace RPGApplication.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Armour armour = ArmourDAO.Get(id);
+            FileUploadHandling.RemoveFile(armour.Image);
             ArmourDAO.Remove(armour);
             return RedirectToAction("Index");
         }
-        /*
-        protected override void Dispose(bool disposing)
+        
+      /*  protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        */
+        }*/
+        
     }
 }

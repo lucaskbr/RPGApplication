@@ -50,7 +50,10 @@ namespace RPGApplication.DAL
 
         public static bool Save(Proficiency proficiency)
         {
-            if (GetByName(proficiency) == null) {
+            proficiency.Name = proficiency.Name.ToUpper();
+
+            if (GetByName(proficiency) == null)
+            {
                 ctx.Proficiencys.Add(proficiency);
                 ctx.SaveChanges();
                 return true;
@@ -60,12 +63,23 @@ namespace RPGApplication.DAL
 
         }
 
-        public static void Update(Proficiency proficiency) {
-            ctx.Entry(proficiency).State = System.Data.Entity.EntityState.Modified;
-            ctx.SaveChanges();
+        public static bool Update(Proficiency proficiency)
+        {
+            proficiency.Name = proficiency.Name.ToUpper();
+            if (GetByName(proficiency) == null)
+            {
+                ctx.Entry(proficiency).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
-
+        public static void Remove(Proficiency proficiency)
+        {
+            ctx.Proficiencys.Remove(proficiency);
+            ctx.SaveChanges();
+        }
 
     }
 }

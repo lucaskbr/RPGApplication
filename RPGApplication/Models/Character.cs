@@ -15,12 +15,12 @@ namespace RPGApplication.Models
         public int CharacterId { get; set; }
 
         [Display(Name = "Imagem:")]
-        public string Imagem { get; set; }
+        public string Image { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Nome:")]
         [MinLength(5, ErrorMessage = "O campo deve ser preenchido com no minimo 5 caracteres")]
-        [MaxLength(15)]
+        [MaxLength(30)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
@@ -35,12 +35,12 @@ namespace RPGApplication.Models
         [Display(Name = "Experiência:")]
         public double Experience { get; set; }
 
+        [Display(Name = "Pontos de atributo:")]
+        public int AttributePoints { get; set; }
+
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Atributos:")]
         public List<AttributeInCharacter> AttributesInCharacter { get; set; }
-
-        [Display(Name = "Itens equipados:")]
-        public List<Item> EquipedItems { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Mochila:")]
@@ -57,31 +57,32 @@ namespace RPGApplication.Models
 
         public Character()
         {
-            
+
         }
 
         public Character(string name, List<AttributeInCharacter> attributesInCharacter, Bag bag)
         {
+            this.Image = "Characters/default.jpg";
             this.Name = name;
             this.LifePoints = 5;
             this.Level = 1;
             this.Experience = 0;
+            this.AttributePoints = 0;
             this.AttributesInCharacter = attributesInCharacter;
-            EquipedItems = new List<Item>();
             this.Bag = bag;
             this.Coins = 100;
             this.RankingPoints = -1;
 
         }
 
-       /* public void MakeAnAttack() {
+        /* public void MakeAnAttack() {
 
-            foreach (var item in Bag.Itens.ToList())
-            {
-                item.
-            }
-        }
-        */
+             foreach (var item in Bag.Itens.ToList())
+             {
+                 item.
+             }
+         }
+         */
 
 
 

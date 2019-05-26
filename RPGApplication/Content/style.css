@@ -1,0 +1,29 @@
+﻿.table-img {
+   height: 100px
+}
+
+
+a {
+   
+    text-decoration: none;
+}
+
+a:hover {
+    
+    text-decoration: none;
+}
+
+
+.font-19 {
+    font-size: 19px;
+}
+
+
+table tbody td {
+    vertical-align: middle !important;
+}
+
+table thead th {
+    vertical-align: middle !important;
+    font-size: 18px;
+}

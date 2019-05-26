@@ -16,6 +16,7 @@ namespace RPGApplication.Models
         public DbSet<Proficiency> Proficiencys { get; set; }
         public DbSet<AttributeInCharacter> AttributeInCharacters { get; set; }
         public DbSet<Bag> Bags { get; set; }
+        public DbSet<ItemInBag> ItemsInBags { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemRarity> ItemsRarity { get; set; }
         public DbSet<Weapon> Weapons { get; set; }

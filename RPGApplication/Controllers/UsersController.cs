@@ -13,8 +13,6 @@ namespace RPGApplication.Controllers
 {
     public class UsersController : Controller
     {
-        //private Context db = new Context();
-
         // GET: Users
         public ActionResult Index()
         {
@@ -52,13 +50,8 @@ namespace RPGApplication.Controllers
 
             user.Character = CreateAnCharacterToUser(user);
 
-
-           
-
             if (ModelState.IsValid)
             {
-                /*db.Users.Add(user);
-                db.SaveChanges();*/
                 UserDAO.Save(user);
                 return RedirectToAction("Index");
             }
@@ -72,9 +65,14 @@ namespace RPGApplication.Controllers
             return View(user);
         }
 
-        private Character CreateAnCharacterToUser(User user) {
+        private Character CreateAnCharacterToUser(User user)
+        {
 
-            Bag bag = new Bag();
+            //Cria a mochila do personagem
+            List<ItemInBag> itemsInBag = new List<ItemInBag>();
+            Bag bag = new Bag(itemsInBag);
+
+            //Cria os atributos
             List<AttributeInCharacter> attributesInCharacter = new List<AttributeInCharacter>();
 
             foreach (var proficiency in ProficiencyDAO.GetAll())
@@ -83,8 +81,9 @@ namespace RPGApplication.Controllers
                 attributesInCharacter.Add(attribute);
             }
 
+            //Cria o personagem em si
             Character character = new Character(user.Login, attributesInCharacter, bag);
-            character.Imagem =  System.IO.Path.Combine(Server.MapPath("~/Images/"), "Default.jpg");
+
             return character;
 
         }
@@ -115,7 +114,6 @@ namespace RPGApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*UserDAO.Update(user);*/
 
                 User userInDataBase = UserDAO.Get(user.UserId);
                 userInDataBase.Name = user.Name;
@@ -152,18 +150,17 @@ namespace RPGApplication.Controllers
         {
             User user = UserDAO.Get(id);
             UserDAO.DisableOrEnable(user);
-            /*db.Users.Remove(user);
-            db.SaveChanges();*/
             return RedirectToAction("Index");
         }
-        /*
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }*/
+
+        /* protected override void Dispose(bool disposing)
+         {
+             if (disposing)
+             {
+                 db.Dispose();
+             }
+             base.Dispose(disposing);
+         }*/
     }
 }
+

@@ -70,6 +70,7 @@ namespace RPGApplication.DAL
         public static void Remove(Armour armour)
         {
             ctx.Armours.Remove(armour);
+            ctx.SaveChanges();
         }
 
 

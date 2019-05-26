@@ -14,8 +14,7 @@ namespace RPGApplication.Models
         public int ItemRarityId { get; set; }
 
         [Display(Name = "Nome:")]
-        [MinLength(5)]
-        [MaxLength(15)]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         public ItemRarity() { }

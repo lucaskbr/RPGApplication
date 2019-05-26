@@ -4,15 +4,15 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Cadastrar</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Cadastrar", "Armours", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Armour</h4>
+        <h4>Armadura</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -20,6 +20,13 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="image" />
             </div>
         </div>
 
@@ -46,11 +53,11 @@
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.ItemRarity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                
-                @Html.DropDownListFor(model => model.ItemRarity.ItemRarityId, (IEnumerable<SelectListItem>)ViewBag.ItemRarity, "SELECIONE")
+                @Html.DropDownListFor(model => model.ItemRarity.ItemRarityId, (IEnumerable<SelectListItem>)ViewBag.ItemRarity, "SELECIONE", new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.ItemRarity, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -73,14 +80,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <button type="submit" value="Create" class="btn btn-dark mr-5">Cadastrar</button>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Index")
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

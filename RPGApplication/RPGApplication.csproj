@@ -128,8 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
-    <Content Include="Images\Default.jpg" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-3.4.1.min.js" />
@@ -144,9 +144,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArmoursController.cs" />
-    <Compile Include="Controllers\AttributeController.cs" />
-    <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\ItemRaritiesController.cs" />
+    <Compile Include="Controllers\ProficienciesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WeaponsController.cs" />
     <Compile Include="DAL\ArmourDAO.cs" />
@@ -160,13 +159,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905232041061_1.cs" />
-    <Compile Include="Migrations\201905232041061_1.Designer.cs">
-      <DependentUpon>201905232041061_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905232258282_3.cs" />
-    <Compile Include="Migrations\201905232258282_3.Designer.cs">
-      <DependentUpon>201905232258282_3.cs</DependentUpon>
+    <Compile Include="Migrations\201905260354511_1.cs" />
+    <Compile Include="Migrations\201905260354511_1.Designer.cs">
+      <DependentUpon>201905260354511_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Armour.cs" />
@@ -177,11 +172,13 @@
     <Compile Include="Models\Combat.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemInBag.cs" />
     <Compile Include="Models\ItemRarity.cs" />
     <Compile Include="Models\Proficiency.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\FileUploadHandling.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -196,11 +193,6 @@
     <Content Include="Views\Characters\Details.cshtml" />
     <Content Include="Views\Characters\Edit.cshtml" />
     <Content Include="Views\Characters\Index.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Armours\Create.cshtml" />
     <Content Include="Views\Armours\Delete.cshtml" />
     <Content Include="Views\Armours\Details.cshtml" />
@@ -216,6 +208,16 @@
     <Content Include="Views\ItemRarities\Details.cshtml" />
     <Content Include="Views\ItemRarities\Edit.cshtml" />
     <Content Include="Views\ItemRarities\Index.cshtml" />
+    <Content Include="Views\Proficiencies\Create.cshtml" />
+    <Content Include="Views\Proficiencies\Delete.cshtml" />
+    <Content Include="Views\Proficiencies\Details.cshtml" />
+    <Content Include="Views\Proficiencies\Edit.cshtml" />
+    <Content Include="Views\Proficiencies\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -225,16 +227,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Armours\" />
+    <Folder Include="Images\Characters\" />
+    <Folder Include="Images\Weapons\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905232041061_1.resx">
-      <DependentUpon>201905232041061_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905232258282_3.resx">
-      <DependentUpon>201905232258282_3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905260354511_1.resx">
+      <DependentUpon>201905260354511_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

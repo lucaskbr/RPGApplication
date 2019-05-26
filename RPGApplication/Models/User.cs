@@ -16,20 +16,20 @@ namespace RPGApplication.Models
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Nome:")]
-        [MinLength(5, ErrorMessage = "O campo deve ser preenchido com no mínimo 5 caracteres")]
+        [MinLength(3, ErrorMessage = "O campo deve ser preenchido com no mínimo 3 caracteres")]
         [MaxLength(20, ErrorMessage = "O campo deve ser preenchido com no máximo 20 caracteres")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Sobrenome:")]
-        [MinLength(5, ErrorMessage = "O campo deve ser preenchido com no mínimo 5 caracteres")]
+        [MinLength(3, ErrorMessage = "O campo deve ser preenchido com no mínimo 3 caracteres")]
         [MaxLength(20, ErrorMessage = "O campo deve ser preenchido com no máximo 20 caracteres")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Login:")]
         [MinLength(1, ErrorMessage = "O campo deve ser preenchido com no mínimo 1 caracter")]
-        [MaxLength(25, ErrorMessage = "O campo deve ser preenchido com no máximo 25 caracteres")]
+        [MaxLength(30, ErrorMessage = "O campo deve ser preenchido com no máximo 30 caracteres")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
@@ -48,8 +48,8 @@ namespace RPGApplication.Models
 
         public Character Character { get; set; }
 
-        [Required]
-        [Range(0,1, ErrorMessage = "O campo só pode conter o valor 0 ou 1")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Range(0, 1, ErrorMessage = "O campo só pode conter o valor 0 ou 1")]
         public int UserAcess { get; set; }
 
         [Required]
@@ -64,22 +64,7 @@ namespace RPGApplication.Models
             this.ActiveAccount = true;
             this.SignUpDate = DateTime.Now;
             this.UserAcess = 0;
-            }
-
-        public User(string name, string lastName, string login, string email, string password, Character character)
-        {
-            this.Name = name;
-            this.LastName = lastName;
-            this.Login = login;
-            this.Email = email;
-            this.Password = password;
-            this.Character = character;
-            this.UserAcess = 0;
-            this.ActiveAccount = true;
-            this.SignUpDate = DateTime.Now;
         }
-
-
-
+        
     }
 }

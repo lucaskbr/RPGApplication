@@ -11,115 +11,117 @@ using RPGApplication.DAL;
 
 namespace RPGApplication.Controllers
 {
-    public class ItemRaritiesController : Controller
+    public class ProficienciesController : Controller
     {
-        // GET: ItemRarities
+        
+        // GET: Proficiencies
         public ActionResult Index()
         {
-            return View(ItemRarityDAO.GetAll());
+            return View(ProficiencyDAO.GetAll());
         }
 
-        // GET: ItemRarities/Details/5
+        // GET: Proficiencies/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ItemRarity itemRarity = ItemRarityDAO.Get(id);
-            if (itemRarity == null)
+            Proficiency proficiency = ProficiencyDAO.Get(id);
+            if (proficiency == null)
             {
                 return HttpNotFound();
             }
-            return View(itemRarity);
+            return View(proficiency);
         }
 
-        // GET: ItemRarities/Create
+        // GET: Proficiencies/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ItemRarities/Create
+        // POST: Proficiencies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RarityId,Name")] ItemRarity itemRarity)
+        public ActionResult Create([Bind(Include = "ProficiencyId,Name")] Proficiency proficiency)
         {
             if (ModelState.IsValid)
             {
-                ItemRarityDAO.Save(itemRarity);
-                return RedirectToAction("Index");
+                if (ProficiencyDAO.Save(proficiency)) {
+                    return RedirectToAction("Index");
+                }
+
+                ModelState.AddModelError("error", "A proficiencia já existe");
             }
 
-            return View(itemRarity);
+            return View(proficiency);
         }
 
-        // GET: ItemRarities/Edit/5
+        // GET: Proficiencies/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ItemRarity itemRarity = ItemRarityDAO.Get(id);
-            if (itemRarity == null)
+            Proficiency proficiency = ProficiencyDAO.Get(id);
+            if (proficiency == null)
             {
                 return HttpNotFound();
             }
-            return View(itemRarity);
+            return View(proficiency);
         }
 
-        // POST: ItemRarities/Edit/5
+        // POST: Proficiencies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemRarityId,Name")] ItemRarity itemRarity)
+        public ActionResult Edit([Bind(Include = "ProficiencyId,Name")] Proficiency proficiency)
         {
             if (ModelState.IsValid)
             {
-                ItemRarity itemRarityInDataBase = ItemRarityDAO.Get(itemRarity.ItemRarityId);
 
-                itemRarityInDataBase.Name = itemRarity.Name.ToUpper();
+                Proficiency proficiencyInDataBase = ProficiencyDAO.Get(proficiency.ProficiencyId);
 
-                if (ItemRarityDAO.Update(itemRarityInDataBase)) {
+                proficiencyInDataBase.Name = proficiency.Name;
+
+                if (ProficiencyDAO.Update(proficiencyInDataBase)) {
                     return RedirectToAction("Index");
                 }
-
-                ModelState.AddModelError("error", "A raridade já está cadastrada");
-
+                ModelState.AddModelError("error", "A proficiencia já existe");
             }
-            return View(itemRarity);
+            return View(proficiency);
         }
 
-        // GET: ItemRarities/Delete/5
+        // GET: Proficiencies/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ItemRarity itemRarity = ItemRarityDAO.Get(id);
-            if (itemRarity == null)
+            Proficiency proficiency = ProficiencyDAO.Get(id);
+            if (proficiency == null)
             {
                 return HttpNotFound();
             }
-            return View(itemRarity);
+            return View(proficiency);
         }
 
-        // POST: ItemRarities/Delete/5
+        // POST: Proficiencies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ItemRarity itemRarity = ItemRarityDAO.Get(id);
-            ItemRarityDAO.Remove(itemRarity);
-
+            Proficiency proficiency = ProficiencyDAO.Get(id);
+            ProficiencyDAO.Remove(proficiency);
             return RedirectToAction("Index");
         }
-        
+
         /*protected override void Dispose(bool disposing)
         {
             if (disposing)

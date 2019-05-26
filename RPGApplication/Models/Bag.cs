@@ -14,24 +14,19 @@ namespace RPGApplication.Models
         public int BagId { get; set; }
 
         [Required]
+        [Display(Name = "Espaço:")]
         public int slots { get; set; }
 
-        public List<Item> Items { get; set; }
-         
+        [Required]
+        [Display(Name = "Itens:")]
+        public List<ItemInBag> ItemsInBag { get; set; }
 
-        public Bag()
+       
+        public Bag(List<ItemInBag> ItemsInBag)
         {
+            this.ItemsInBag = ItemsInBag;
             this.slots = 5;
         }
-
-        public void CheckIfExistsEmptySlotsInBag()
-        {
-        }
-
-        public void AddNewItemInBag()
-        {
-
-        }
-
+        
     }
 }
