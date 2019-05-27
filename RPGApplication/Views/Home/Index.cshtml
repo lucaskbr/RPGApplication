@@ -1,0 +1,125 @@
+﻿@model RPGApplication.Models.Character
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Personagem</h2>
+
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <!--PERSONAGEM-->
+            <div class="row">
+
+                <div class="col-md-6">
+                    <img src="~/Images/@Html.DisplayFor(model => model.Image)" class="img-fluid character-img" />
+                </div>
+
+                <div class="col-md-6">
+
+                    <h3 class="text-center">
+                        @Html.DisplayFor(model => model.Name)
+                    </h3>
+
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.Level)
+                        </strong>
+                        @Html.DisplayFor(model => model.Level)
+                    </p>
+
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.Experience)
+                        </strong>
+                        @Html.DisplayFor(model => model.Experience)
+                    </p>
+
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.RankingPoints)
+                        </strong>
+                        @Html.DisplayFor(model => model.RankingPoints)
+                    </p>
+
+                    <p>
+                        <strong>
+                            @Html.DisplayNameFor(model => model.AttributePoints)
+                        </strong>
+                        @Html.DisplayFor(model => model.AttributePoints)
+                    </p>
+
+                </div>
+            </div>
+            <!--ATRBIUTOS-->
+            <div>
+                <hr />
+
+                <h3>Atributos</h3>
+
+                <p>
+                    <img src="~/Images/Static/lifepoints.png" class="img-fluid profile-attributes-img" />
+                    <strong>
+                        @Html.DisplayNameFor(model => model.LifePoints)
+                    </strong>
+                    @Html.DisplayFor(model => model.LifePoints)
+
+                </p>
+
+                <div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            
+            <h3>Mochila</h3>
+
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.Bag.slots)</strong>
+                @Html.DisplayFor(model => model.Bag.slots)
+            </p>
+
+            <div class="row">
+
+                @Html.DisplayNameFor(model => model.Bag.ItemsInBag)
+                @Html.DisplayFor(model => model.Bag.ItemsInBag)
+
+              
+                @foreach (var item in Model.Bag.ItemsInBag)
+                {
+
+                    <div class="col-md-4">
+                        <h4>@item.Item.ItemId</h4>
+                      
+            
+                        <img src="~/Images/@item.Item.Image" class="table-img" title="@item.Item.Description" />
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+
+
+                    <p>
+                        <img src="~/Images/Static/coin.png" class="img-fluid profile-attributes-img" />
+                        <strong>
+                            @Html.DisplayNameFor(model => model.Coins)
+                        </strong>
+                        @Html.DisplayFor(model => model.Coins)
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <p>
+            @*Html.ActionLink("Edit", "Edit", new { id = Model.CharacterId }) |
+                @Html.ActionLink("Back to List", "Index")*@
+        </p>
+    </div>
+</section>

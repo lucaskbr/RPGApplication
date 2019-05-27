@@ -27,3 +27,12 @@ table thead th {
     vertical-align: middle !important;
     font-size: 18px;
 }
+
+
+.character-img {
+    height: 300px;
+}
+
+.profile-attributes-img {
+    height: 60px;
+}

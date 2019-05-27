@@ -21,12 +21,14 @@ namespace RPGApplication.Models
         [Display(Name = "Itens:")]
         public List<ItemInBag> ItemsInBag { get; set; }
 
-       
+
+        public Bag() { }
+
         public Bag(List<ItemInBag> ItemsInBag)
         {
             this.ItemsInBag = ItemsInBag;
             this.slots = 5;
         }
-        
+
     }
 }

@@ -17,6 +17,17 @@ namespace RPGApplication.DAL
             return ctx.Characters.Find(id);
         }
 
+        public static Character GetAllInformations(int? id)
+        {
+            if (id != null) {
+                 return ctx.Characters
+                    .Include("AttributesInCharacter.Proficiency")
+                    .Include("Bag.ItemsInBag")
+                    .FirstOrDefault(x => x.CharacterId == id); 
+            }
+            return null;
+        }
+        
         public static List<Character> GetAll()
         {
             List<Character> characterList = new List<Character>();
