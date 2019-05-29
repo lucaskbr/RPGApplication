@@ -32,7 +32,6 @@ namespace RPGApplication.DAL
             return ctx.Armours.FirstOrDefault(p => p.Name.Equals(armour.Name));
         }
 
-
         public static List<Armour> GetAll()
         {
 

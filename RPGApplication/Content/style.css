@@ -1,17 +1,15 @@
 ﻿.table-img {
-   height: 100px
+    height: 100px;
 }
 
 
 a {
-   
     text-decoration: none;
 }
 
-a:hover {
-    
-    text-decoration: none;
-}
+    a:hover {
+        text-decoration: none;
+    }
 
 
 .font-19 {
@@ -35,4 +33,59 @@ table thead th {
 
 .profile-attributes-img {
     height: 60px;
+}
+
+
+.item-box {
+    cursor: pointer;
+}
+
+
+.item-img {
+}
+
+
+
+.item-description {
+    background: #F8F8F8;
+    border: 5px solid #DFDFDF;
+    color: #717171;
+    font-size: 13px;
+    width: 250px;
+    letter-spacing: 1px;
+    line-height: 30px;
+    position: absolute;
+    text-transform: uppercase;
+    top: -155px;
+    left: -30px;
+    display: none;
+    padding: 0 20px;
+    z-index: 99;
+}
+
+    .item-description:after {
+        content: '';
+        position: absolute;
+        bottom: -19px;
+        width: 30px;
+        height: 30px;
+        border-bottom: 5px solid #dfdfdf;
+        border-right: 5px solid #dfdfdf;
+        background: #f8f8f8;
+        left: 50%;
+        margin-left: -10px;
+        -moz-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+.item-box:hover .item-description {
+    display: block;
+}
+
+
+.item-rarity {
+    color: blueviolet;
+    font-size: 10px;
+    font-style: italic;
 }

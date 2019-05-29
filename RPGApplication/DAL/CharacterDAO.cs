@@ -22,7 +22,7 @@ namespace RPGApplication.DAL
             if (id != null) {
                  return ctx.Characters
                     .Include("AttributesInCharacter.Proficiency")
-                    .Include("Bag.ItemsInBag")
+                    .Include("Bag.ItemsInBag.Item.ItemRarity")
                     .FirstOrDefault(x => x.CharacterId == id); 
             }
             return null;

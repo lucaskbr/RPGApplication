@@ -4,11 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Personagem</h2>
 
 
 <section class="container">
-    <div class="row">
+    <div class="row py-5">
+        <div class="col-md-12">
+            <h2 class="text-center">Personagem</h2>
+        </div>
+    </div>
+    <div class="row py-5">
         <div class="col-md-6">
             <!--PERSONAGEM-->
             <div class="row">
@@ -65,46 +69,67 @@
                         @Html.DisplayNameFor(model => model.LifePoints)
                     </strong>
                     @Html.DisplayFor(model => model.LifePoints)
-
                 </p>
 
-                <div>
-
-                </div>
             </div>
 
         </div>
         <div class="col-md-6">
-            
+
             <h3>Mochila</h3>
+
+            <img src="~/Images/Static/inventory.png" class="img-fluid" />
 
             <p>
                 <strong>@Html.DisplayNameFor(model => model.Bag.slots)</strong>
                 @Html.DisplayFor(model => model.Bag.slots)
             </p>
 
-            <div class="row">
+            <div class="row d-flex justify-content-center align-items-center">
 
-                @Html.DisplayNameFor(model => model.Bag.ItemsInBag)
-                @Html.DisplayFor(model => model.Bag.ItemsInBag)
-
-              
                 @foreach (var item in Model.Bag.ItemsInBag)
                 {
+                    <div class="col-md-4 item-box m-1">
 
-                    <div class="col-md-4">
-                        <h4>@item.Item.ItemId</h4>
-                      
-            
-                        <img src="~/Images/@item.Item.Image" class="table-img" title="@item.Item.Description" />
+                        <img src="~/Images/@item.Item.Image" class="table-img item-img" title="@item.Item.Description" />
+
+
+                        <div class="item-description">
+
+                            <h6 class="text-center py-2">@item.Item.Name</h6>
+
+                            @if (item.Item.GetType() == typeof(RPGApplication.Models.Weapon))
+                            {
+
+                                RPGApplication.Models.Weapon weapon = (RPGApplication.Models.Weapon)item.Item;
+                                <div>
+                                    <strong>Dano:</strong>
+                                    @weapon.Damage
+                                </div>
+                                <div>
+                                    <strong>Crítico:</strong>
+                                    @weapon.Critical
+                                </div>
+                            }
+                            else
+                            {
+                                RPGApplication.Models.Armour armour = (RPGApplication.Models.Armour)item.Item;
+                                <div>
+                                    <strong>Defesa:</strong>
+                                    @armour.Defense
+                                </div>
+                                <div>
+                                    <strong>Evasão:</strong>
+                                    @armour.Defense
+                                </div>
+                            }
+                            <strong class="text-center item-rarity">@item.Item.ItemRarity.Name</strong>
+                        </div>
                     </div>
                 }
             </div>
             <div class="row">
-                <div class="col-md-12">
-
-
-
+                <div class="col-md-12 my-5">
                     <p>
                         <img src="~/Images/Static/coin.png" class="img-fluid profile-attributes-img" />
                         <strong>

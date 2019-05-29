@@ -118,8 +118,8 @@ namespace RPGApplication.Controllers
                 User userInDataBase = UserDAO.Get(user.UserId);
                 userInDataBase.Name = user.Name;
                 userInDataBase.LastName = user.LastName;
-                user.UserAcess = user.UserAcess;
-                user.ActiveAccount = user.ActiveAccount;
+                userInDataBase.UserAcess = user.UserAcess;
+                userInDataBase.ActiveAccount = user.ActiveAccount;
 
                 UserDAO.Update(userInDataBase);
 

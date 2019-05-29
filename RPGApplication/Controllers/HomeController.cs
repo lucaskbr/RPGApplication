@@ -24,9 +24,7 @@ namespace RPGApplication.Controllers
             if (character == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            //ViewBag.Armour = ItemFilter.GetArmours(character.Bag.ItemsInBag);
-            //ViewBag.Weapons = weaponList;
+          
             return View(character);
         }
 
