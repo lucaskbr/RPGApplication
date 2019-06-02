@@ -8,8 +8,13 @@ Project was created with the intention of checking the resources of C # MVC, thi
 Frameworks, Librarys and Design patterns used so far:
 
 MVC.
+
 Singleton.
+
 DAO Pattern.
+
 Entity Framework.
+
 Vereyon.Web.FlashMessage.
+
 Bootstrap.
