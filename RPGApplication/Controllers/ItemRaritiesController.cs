@@ -11,6 +11,7 @@ using RPGApplication.DAL;
 
 namespace RPGApplication.Controllers
 {
+    [VerifyAccessLevel]
     public class ItemRaritiesController : Controller
     {
         // GET: ItemRarities

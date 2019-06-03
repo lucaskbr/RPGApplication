@@ -12,9 +12,10 @@ using RPGApplication.Utils;
 
 namespace RPGApplication.Controllers
 {
+    [VerifyAccessLevel]
     public class WeaponsController : Controller
     {
-
+        
 
         // GET: Weapons
         public ActionResult Index()

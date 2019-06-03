@@ -24,7 +24,7 @@ namespace RPGApplication.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Pontos de vida:")]
+        [Display(Name = "PONTOS DE VIDA:")]
         public int LifePoints { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]

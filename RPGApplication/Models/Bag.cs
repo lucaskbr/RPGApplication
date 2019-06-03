@@ -22,7 +22,9 @@ namespace RPGApplication.Models
         public List<ItemInBag> ItemsInBag { get; set; }
 
 
-        public Bag() { }
+        public Bag() {
+            this.slots = 5;
+        }
 
         public Bag(List<ItemInBag> ItemsInBag)
         {

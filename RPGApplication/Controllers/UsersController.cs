@@ -14,12 +14,14 @@ namespace RPGApplication.Controllers
     public class UsersController : Controller
     {
         // GET: Users
+        [VerifyAccessLevel]
         public ActionResult Index()
         {
             return View(UserDAO.GetAll());
         }
 
         // GET: Users/Details/5
+        [VerifyAccessLevel]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -68,9 +70,23 @@ namespace RPGApplication.Controllers
         private Character CreateAnCharacterToUser(User user)
         {
 
+
+
             //Cria a mochila do personagem
+            Bag bag = new Bag();
+
             List<ItemInBag> itemsInBag = new List<ItemInBag>();
-            Bag bag = new Bag(itemsInBag);
+
+            for (int i = 0; i < bag.slots; i++)
+            {
+                ItemInBag itemInBag = new ItemInBag();
+                itemInBag.Item = null;
+                itemInBag.Equipped = false;
+                itemInBag.Bag = bag;
+                itemsInBag.Add(itemInBag);
+            }
+
+            bag.ItemsInBag = itemsInBag;
 
             //Cria os atributos
             List<AttributeInCharacter> attributesInCharacter = new List<AttributeInCharacter>();
@@ -91,6 +107,7 @@ namespace RPGApplication.Controllers
 
 
         // GET: Users/Edit/5
+        [VerifyAccessLevel]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -118,7 +135,7 @@ namespace RPGApplication.Controllers
                 User userInDataBase = UserDAO.Get(user.UserId);
                 userInDataBase.Name = user.Name;
                 userInDataBase.LastName = user.LastName;
-                userInDataBase.UserAcess = user.UserAcess;
+                userInDataBase.AccessLevel = user.AccessLevel;
                 userInDataBase.ActiveAccount = user.ActiveAccount;
 
                 UserDAO.Update(userInDataBase);
@@ -129,6 +146,7 @@ namespace RPGApplication.Controllers
         }
 
         // GET: Users/Delete/5
+        [VerifyAccessLevel]
         public ActionResult Delete(int? id)
         {
             if (id == null)

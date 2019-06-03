@@ -13,7 +13,6 @@ namespace RPGApplication.Models
         [Key]
         public int ItemInBagId { get; set; }
 
-        [Required]
         [Display(Name = "Item:")]
         public Item Item { get; set; }
 

@@ -12,6 +12,7 @@ using RPGApplication.Utils;
 
 namespace RPGApplication.Controllers
 {
+    [VerifyAccessLevel]
     public class ArmoursController : Controller
     {
 

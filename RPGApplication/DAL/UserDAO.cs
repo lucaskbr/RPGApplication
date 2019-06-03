@@ -27,6 +27,13 @@ namespace RPGApplication.DAL
             return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login));
         }
 
+        public static User GetByLoginAndPassword(User user)
+        {
+            return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login) && x.Password.Equals(user.Password));
+        }
+
+
+
         public static List<User> GetAll()
         {
             List<User> userList = new List<User>();

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<RPGApplication.Models.Item>
+
+@{
+    ViewBag.Title = "Market";
+
+}
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-end">
+        <div class="flash-message">
+            @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+        </div>
+    </div>
+</div>
+
+
+<section class="container">
+    <div class="row">
+        <h2 class="col-md-12 text-center mb-5">Mercado</h2>
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 item-box p-2 m-4">
+                <div class="card h-100">
+
+                    <img class="card-img-top" src="~/Images/@Html.DisplayFor(modelItem => item.Image)" class="table-img item-img">
+
+                    <div class="card-body">
+                        <h5 class="text-center mb-4">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </h5>
+                        <div class="item-description">
+
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.Description)</strong>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </div>
+
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.RequiredLevel)</strong>
+                                @Html.DisplayFor(modelItem => item.RequiredLevel)
+
+                            </div>
+                            <div>
+                                <strong class="item-price">
+                                    @Html.DisplayNameFor(model => model.Price)
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            @if (item.GetType() == typeof(RPGApplication.Models.Weapon))
+                            {
+                                RPGApplication.Models.Weapon weapon = (RPGApplication.Models.Weapon)item;
+
+                                <div>
+                                    <strong>DANO:</strong>
+                                    @weapon.Damage
+                                </div>
+                                <div>
+                                    <strong>CRÍTICO:</strong>
+                                    @weapon.Critical
+                                </div>
+
+                            }
+                            else
+                            {
+                                RPGApplication.Models.Armour armour = (RPGApplication.Models.Armour)item;
+                                <div>
+                                    <strong>DEFESA:</strong>
+                                    @armour.Defense
+                                </div>
+                                <div>
+                                    <strong>EVASÃO:</strong>
+                                    @armour.Defense
+                                </div>
+                            }
+                        </div>
+                        <div>
+                            <strong class="text-center item-rarity">@item.ItemRarity.Name</strong>
+                        </div>
+                        @Html.ActionLink("COMPRAR", "BuyItem", "Character", new { itemId = item.ItemId }, new { @class = "btn btn-dark btn-block mt-3" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+

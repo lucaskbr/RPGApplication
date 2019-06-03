@@ -48,14 +48,17 @@ namespace RPGApplication.Models
 
         public Character Character { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
+        [Required]
+        [Display(Name = "Senha:")]
         [Range(0, 1, ErrorMessage = "O campo só pode conter o valor 0 ou 1")]
-        public int UserAcess { get; set; }
+        public int AccessLevel { get; set; }
 
         [Required]
+        [Display(Name = "Conta Ativa:")]
         public bool ActiveAccount { get; set; }
 
         [Required]
+        [Display(Name = "Data de registro:")]
         public DateTime SignUpDate { get; set; }
 
 
@@ -63,7 +66,7 @@ namespace RPGApplication.Models
         {
             this.ActiveAccount = true;
             this.SignUpDate = DateTime.Now;
-            this.UserAcess = 0;
+            this.AccessLevel = 0;
         }
         
     }

@@ -2,7 +2,6 @@
     height: 100px;
 }
 
-
 a {
     text-decoration: none;
 }
@@ -11,11 +10,21 @@ a {
         text-decoration: none;
     }
 
-
 .font-19 {
     font-size: 19px;
 }
 
+.h-150 {
+    height: 150px;
+}
+
+.h-300 {
+    height: 300px;
+}
+
+.full-rounded {
+    border-radius: 100px !important;
+}
 
 table tbody td {
     vertical-align: middle !important;
@@ -26,25 +35,21 @@ table thead th {
     font-size: 18px;
 }
 
-
 .character-img {
     height: 300px;
+    border: 2px #000 solid;
 }
 
 .profile-attributes-img {
     height: 60px;
 }
 
-
 .item-box {
     cursor: pointer;
 }
 
-
 .item-img {
 }
-
-
 
 .item-description {
     background: #F8F8F8;
@@ -83,9 +88,24 @@ table thead th {
     display: block;
 }
 
-
 .item-rarity {
     color: blueviolet;
     font-size: 10px;
     font-style: italic;
+}
+
+.item-price {
+    color: gold;
+    font-size: 10px;
+    font-style: italic;
+}
+
+
+.card-img-top {
+    height: 200px !important;
+}
+
+
+.flash-message {
+    position: absolute;
 }

@@ -12,14 +12,12 @@ namespace RPGApplication.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
-        public ActionResult Index(int? id)
+        [VerifyAuthentication]
+        public ActionResult Index()
         {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Character character = CharacterDAO.GetAllInformations(id);
+            int userId = Convert.ToInt16(SessionManager.GetUserId());
+            
+            Character character = CharacterDAO.GetAllInformations(userId);
             
             if (character == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -27,6 +25,49 @@ namespace RPGApplication.Controllers
           
             return View(character);
         }
+
+
+        public ActionResult Login()
+        {
+            if (SessionManager.GetUserId() != string.Empty)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login([Bind(Include = "Login, Password")] User user) {
+            
+            if (user.Login == null || user.Password == null) {
+                ModelState.AddModelError("nullFields", "Favor preencher os campos para realizar o login");
+                return View(user);
+            }
+
+            user = UserDAO.GetByLoginAndPassword(user);
+
+            if (user != null) {
+                SessionManager.Login(user);
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("deniedAuthentication", "Não foi possível autenticar o usuário");
+
+            return View(user);
+        }
+
+
+        public ActionResult Register() {
+            return RedirectToAction("Create", "Users");
+        }
+
+
+        public ActionResult Market()
+        {
+            return View(ItemDAO.GetAll());
+        }
+
+
 
 
 
