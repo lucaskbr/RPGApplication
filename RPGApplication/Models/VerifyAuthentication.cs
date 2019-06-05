@@ -17,7 +17,6 @@ namespace RPGApplication.Models
 
             string userId = SessionManager.GetUserId();
 
-
             if (userId.Equals(string.Empty))
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Login" }));
             base.OnActionExecuting(filterContext);

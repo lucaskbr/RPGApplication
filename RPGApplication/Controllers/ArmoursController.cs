@@ -51,37 +51,28 @@ namespace RPGApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase image, [Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,ItemRarity,Defense,Evasion")] Armour armour)
         {
-        
-            armour.ItemRarity = ItemRarityDAO.Get(armour.ItemRarity.ItemRarityId);
 
             if (ModelState.IsValid)
             {
 
-                if (image != null)
+                armour.ItemRarity = ItemRarityDAO.Get(armour.ItemRarity.ItemRarityId);
+
+                if (armour.ItemRarity != null)
                 {
-
-                    string newImageName = FileUploadHandling.RenameFile(image, armour.Name);
-                    FileUploadHandling.SaveFile(image, newImageName, "Armours");
-                    armour.Image = "Armours/" + newImageName;
+                    armour = SetAnImageToNewArmour(armour, image);
+                    ArmourDAO.Save(armour);
+                    return RedirectToAction("Index");
                 }
-                else
-                {
-                    armour.Image = "Armours/default.jpg";
+                else {
+                    ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
                 }
-
-                ArmourDAO.Save(armour);
-                return RedirectToAction("Index");
-            }
-
-            if (armour.ItemRarity == null)
-            {
-                ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
             }
 
             ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(armour);
         }
 
+        
         // GET: Armours/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -110,7 +101,7 @@ namespace RPGApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                
+
                 Armour armourInDataBase = ArmourDAO.Get(armour.ItemId);
 
                 armourInDataBase.Name = armour.Name;
@@ -160,15 +151,34 @@ namespace RPGApplication.Controllers
             ArmourDAO.Remove(armour);
             return RedirectToAction("Index");
         }
-        
-      /*  protected override void Dispose(bool disposing)
+
+        /*  protected override void Dispose(bool disposing)
+          {
+              if (disposing)
+              {
+                  db.Dispose();
+              }
+              base.Dispose(disposing);
+          }*/
+
+
+        private Armour SetAnImageToNewArmour(Armour armour, HttpPostedFileBase image)
         {
-            if (disposing)
+
+            if (image != null)
             {
-                db.Dispose();
+                string newImageName = FileUploadHandling.RenameFile(image, armour.Name);
+                FileUploadHandling.SaveFile(image, newImageName, "Armours");
+                armour.Image = "Armours/" + newImageName;
             }
-            base.Dispose(disposing);
-        }*/
-        
+            else
+            {
+                armour.Image = "Armours/default.jpg";
+            }
+
+            return armour;
+
+        }
+
     }
 }

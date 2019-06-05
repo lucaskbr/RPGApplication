@@ -66,46 +66,7 @@ namespace RPGApplication.Controllers
 
             return View(user);
         }
-
-        private Character CreateAnCharacterToUser(User user)
-        {
-
-
-
-            //Cria a mochila do personagem
-            Bag bag = new Bag();
-
-            List<ItemInBag> itemsInBag = new List<ItemInBag>();
-
-            for (int i = 0; i < bag.slots; i++)
-            {
-                ItemInBag itemInBag = new ItemInBag();
-                itemInBag.Item = null;
-                itemInBag.Equipped = false;
-                itemInBag.Bag = bag;
-                itemsInBag.Add(itemInBag);
-            }
-
-            bag.ItemsInBag = itemsInBag;
-
-            //Cria os atributos
-            List<AttributeInCharacter> attributesInCharacter = new List<AttributeInCharacter>();
-
-            foreach (var proficiency in ProficiencyDAO.GetAll())
-            {
-                AttributeInCharacter attribute = new AttributeInCharacter(proficiency, 0);
-                attributesInCharacter.Add(attribute);
-            }
-
-            //Cria o personagem em si
-            Character character = new Character(user.Login, attributesInCharacter, bag);
-
-            return character;
-
-        }
-
-
-
+        
         // GET: Users/Edit/5
         [VerifyAccessLevel]
         public ActionResult Edit(int? id)
@@ -179,6 +140,48 @@ namespace RPGApplication.Controllers
              }
              base.Dispose(disposing);
          }*/
+
+
+        private List<ItemInBag> CreateItemsInBag(Bag bag)
+        {
+
+            List<ItemInBag> itemsInBag = new List<ItemInBag>();
+
+            for (int i = 0; i < bag.slots; i++)
+            {
+                ItemInBag itemInBag = new ItemInBag();
+                itemInBag.Item = null;
+                itemInBag.Equipped = false;
+                itemInBag.Bag = bag;
+                itemsInBag.Add(itemInBag);
+            }
+            return itemsInBag;
+        }
+
+        private Bag CreateAnBagToAnCharacter()
+        {
+            Bag bag = new Bag();
+            bag.ItemsInBag = CreateItemsInBag(bag);
+            return bag;
+        }
+
+        private List<AttributeInCharacter> CreateAttributesToAnCharacter()
+        {
+            List<AttributeInCharacter> attributesInCharacter = new List<AttributeInCharacter>();
+
+            foreach (var proficiency in ProficiencyDAO.GetAll())
+            {
+                AttributeInCharacter attribute = new AttributeInCharacter(proficiency, 0);
+                attributesInCharacter.Add(attribute);
+            }
+            return attributesInCharacter;
+        }
+        
+        private Character CreateAnCharacterToUser(User user)
+        {
+            return new Character(user.Login, CreateAttributesToAnCharacter(), CreateAnBagToAnCharacter());
+        }
+
     }
 }
 

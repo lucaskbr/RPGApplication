@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArmoursController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\CombatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemRaritiesController.cs" />
     <Compile Include="Controllers\ProficienciesController.cs" />
@@ -168,9 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906022301210_1.cs" />
-    <Compile Include="Migrations\201906022301210_1.Designer.cs">
-      <DependentUpon>201906022301210_1.cs</DependentUpon>
+    <Compile Include="Migrations\201906041819015_1.cs" />
+    <Compile Include="Migrations\201906041819015_1.Designer.cs">
+      <DependentUpon>201906041819015_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Armour.cs" />
@@ -233,6 +234,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Market.cshtml" />
+    <Content Include="Views\Combats\Create.cshtml" />
+    <Content Include="Views\Combats\Delete.cshtml" />
+    <Content Include="Views\Combats\Details.cshtml" />
+    <Content Include="Views\Combats\Edit.cshtml" />
+    <Content Include="Views\Combats\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -246,13 +252,14 @@
     <Folder Include="Images\Characters\" />
     <Folder Include="Images\Weapons\" />
     <Folder Include="Views\Character\" />
+    <Folder Include="Views\Combates\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906022301210_1.resx">
-      <DependentUpon>201906022301210_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906041819015_1.resx">
+      <DependentUpon>201906041819015_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

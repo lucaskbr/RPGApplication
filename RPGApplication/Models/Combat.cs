@@ -22,6 +22,18 @@ namespace RPGApplication.Models
         public Character Winner { get; set; }
 
 
+        public Combat(Character characterOne, Character characterTwo, List<Attack> attacks, Character winner) {
+            this.CharacterOne = CharacterOne;
+            this.CharacterTwo = characterTwo;
+            this.Attacks = attacks;
+            this.Winner = winner;
+        }
+
+
+
+
+
+
 
 
     }

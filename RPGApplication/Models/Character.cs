@@ -11,6 +11,16 @@ namespace RPGApplication.Models
     public class Character
     {
 
+        public const string AGILITY = "AGILIDADE";
+        public const string STRENGTH = "FORCA";
+        public const string CONSTITUTION = "CONSTITUICAO";
+
+        public const int AGILITY_BASE = 1;
+        public const int STRENGTH_BASE = 3;
+        public const int CONSTITUTION_BASE = 5;
+
+
+
         [Key]
         public int CharacterId { get; set; }
 
@@ -75,16 +85,106 @@ namespace RPGApplication.Models
 
         }
 
-        /* public void MakeAnAttack() {
 
-             foreach (var item in Bag.Itens.ToList())
-             {
-                 item.
-             }
-         }
-         */
+        /* public int GetBonusFromAttribute()
+         {
+             //return GetDamageOfWeaponsEquipped();
+         }*/
+
+        public int GetBonusFromAttribute(Proficiency proficiency)
+        {
+
+            return AttributesInCharacter.FirstOrDefault(x => x.Proficiency.Name.Equals(proficiency.Name)).ProficiencyPoints;
+
+            /*
+            foreach (var item in AttributesInCharacter)
+            {
+                if (item.Equals(proficiency.Name))
+                {
+                    return item.ProficiencyPoints;
+                }
+            }
+
+            return 0;*/
+
+        }
 
 
+        public int GetLife()
+        {
+            return GetBonusFromAttribute(new Proficiency(CONSTITUTION)) + CONSTITUTION_BASE + LifePoints;
+        }
+
+        public double ChanceOfCrit()
+        {
+            return GetBonusFromAttribute(new Proficiency(AGILITY)) + AGILITY_BASE;
+        }
+
+        public double ChanceOfDodge()
+        {
+            return GetBonusFromAttribute(new Proficiency(AGILITY)) + AGILITY_BASE;
+        }
+
+        public int MakeAttack()
+        {
+            return GetBonusFromAttribute(new Proficiency(STRENGTH)) + GetDamageOfWeaponsEquipped();
+        }
+
+        public int MakeDefense()
+        {
+            return GetBonusFromAttribute(new Proficiency(STRENGTH)) + GetDefenseOfArmoursEquipped();
+
+        }
+
+        public int GetDamageOfWeaponsEquipped()
+        {
+            return GetWeaponsEquipped().Sum(x => x.Damage);
+        }
+
+
+        public int GetDefenseOfArmoursEquipped()
+        {
+            return GetArmoursEquipped().Sum(x => x.Defense);
+        }
+
+
+        public double GetCritOfWeaponsEquipped()
+        {
+            return GetWeaponsEquipped().Sum(x => x.Critical);
+        }
+
+        public double GetEvasionOfArmoursEquipped()
+        {
+            return GetArmoursEquipped().Sum(x => x.Evasion);
+        }
+
+
+        public List<Armour> GetArmoursEquipped()
+        {
+            return Bag.ItemsInBag
+                        .Where(
+                            x => x.Equipped == true &&
+                            x.Item != null &&
+                            x.Item.GetType() == typeof(Armour)
+                        )
+                        .ToList()
+                        .ConvertAll(x => (Armour)x.Item)
+                        .ToList();
+        }
+
+
+        public List<Weapon> GetWeaponsEquipped()
+        {
+            return Bag.ItemsInBag
+                        .Where(
+                            x => x.Equipped == true &&
+                            x.Item != null &&
+                            x.Item.GetType() == typeof(Weapon)
+                        )
+                        .ToList()
+                        .ConvertAll(x => (Weapon)x.Item)
+                        .ToList();
+        }
 
 
     }

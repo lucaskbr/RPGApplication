@@ -23,6 +23,11 @@ namespace RPGApplication.Controllers
         {
 
             Character character = CharacterDAO.Get(characterId);
+            character.GetCritOfWeaponsEquipped();
+
+
+
+            character.GetDamageOfWeaponsEquipped();
 
             if (character.AttributePoints > 0)
             {

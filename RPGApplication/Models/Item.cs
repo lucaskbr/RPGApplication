@@ -37,6 +37,7 @@ namespace RPGApplication.Models
         [Display(Name = "Preço:")]
         public int Price { get; set; }
 
+        [Display(Name = "Raridade do item:")]
         public ItemRarity ItemRarity { get; set; }
 
 

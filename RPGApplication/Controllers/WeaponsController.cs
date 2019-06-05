@@ -15,7 +15,7 @@ namespace RPGApplication.Controllers
     [VerifyAccessLevel]
     public class WeaponsController : Controller
     {
-        
+
 
         // GET: Weapons
         public ActionResult Index()
@@ -53,33 +53,23 @@ namespace RPGApplication.Controllers
         public ActionResult Create(HttpPostedFileBase image, [Bind(Include = "ItemId,Name,Description,RequiredLevel,Price,ItemRarity,Damage,Critical")] Weapon weapon)
         {
 
-            weapon.ItemRarity = ItemRarityDAO.Get(weapon.ItemRarity.ItemRarityId);
-
             if (ModelState.IsValid)
             {
-
-                if (image != null)
+                weapon.ItemRarity = ItemRarityDAO.Get(weapon.ItemRarity.ItemRarityId);
+                if (weapon.ItemRarity != null)
                 {
-
-                    string newImageName = FileUploadHandling.RenameFile(image, weapon.Name);
-                    FileUploadHandling.SaveFile(image, newImageName, "Weapons");
-                    weapon.Image = "Weapons/" + newImageName;
+                    weapon = SetAnImageToNewWeapon(weapon, image);
+                    WeaponDAO.Save(weapon);
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    weapon.Image = "Weapons/default.jpg";
+                    ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
                 }
-
-                WeaponDAO.Save(weapon);
-                return RedirectToAction("Index");
             }
-
-            if (weapon.ItemRarity == null) {
-                ModelState.AddModelError("error", "Necessário selecionar a raridade do item");
-            }
-
             ViewBag.ItemRarity = new SelectList(ItemRarityDAO.GetAll(), "ItemRarityId", "Name");
             return View(weapon);
+
         }
 
         // GET: Weapons/Edit/5
@@ -169,6 +159,28 @@ namespace RPGApplication.Controllers
             }
             base.Dispose(disposing);
         }*/
+
+
+
+        private Weapon SetAnImageToNewWeapon(Weapon weapon, HttpPostedFileBase image)
+        {
+
+            if (image != null)
+            {
+                string newImageName = FileUploadHandling.RenameFile(image, weapon.Name);
+                FileUploadHandling.SaveFile(image, newImageName, "Weapons");
+                weapon.Image = "Weapons/" + newImageName;
+            }
+            else
+            {
+                weapon.Image = "Weapons/default.jpg";
+            }
+
+            return weapon;
+
+        }
+
+
 
     }
 }
