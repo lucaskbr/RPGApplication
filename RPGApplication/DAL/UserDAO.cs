@@ -16,7 +16,7 @@ namespace RPGApplication.DAL
         {
             if (id != null)
             {
-                return ctx.Users.Find(id);
+                return ctx.Users.Include("Character").FirstOrDefault(x => x.UserId == id);
             }
             return null;
         }
@@ -24,12 +24,12 @@ namespace RPGApplication.DAL
 
         public static User GetByLogin(User user)
         {
-            return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login));
+            return ctx.Users.Include("Character").FirstOrDefault(x => x.Login.Equals(user.Login));
         }
 
         public static User GetByLoginAndPassword(User user)
         {
-            return ctx.Users.FirstOrDefault(x => x.Login.Equals(user.Login) && x.Password.Equals(user.Password));
+            return ctx.Users.Include("Character").FirstOrDefault(x => x.Login.Equals(user.Login) && x.Password.Equals(user.Password));
         }
 
 

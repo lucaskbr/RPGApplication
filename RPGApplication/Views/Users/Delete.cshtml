@@ -1,6 +1,7 @@
 ﻿@model RPGApplication.Models.User
 
 @{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "Delete";
 }
 
@@ -52,11 +53,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserAcess)
+            @Html.DisplayNameFor(model => model.AccessLevel)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserAcess)
+            @Html.DisplayFor(model => model.AccessLevel)
         </dd>
 
         <dt>

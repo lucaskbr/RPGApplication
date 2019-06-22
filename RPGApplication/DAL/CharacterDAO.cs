@@ -17,6 +17,13 @@ namespace RPGApplication.DAL
             return ctx.Characters.Find(id);
         }
 
+
+        public static Character GetByUserLogin(User user)
+        {
+            return ctx.Characters.FirstOrDefault(x => x.Name.Equals(user.Login));
+        }
+
+
         public static Character GetAllInformations(int? id)
         {
             if (id != null) {
@@ -33,7 +40,7 @@ namespace RPGApplication.DAL
             List<Character> characterList = new List<Character>();
             try
             {
-                characterList = ctx.Characters.ToList();
+                characterList = ctx.Characters.OrderBy(x => x.Name).ToList();
             }
             catch (Exception e)
             {

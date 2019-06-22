@@ -4,159 +4,165 @@
     ViewBag.Title = "Index";
 }
 
+<section class="container-fluid mh-90-vh bg-black">
+    
+    <div class="flash-message">
+        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+    </div>
 
 
-<section class="container">
-    <div class="row py-5">
-        <div class="col-md-6">
-            <!--PERSONAGEM-->
-            <div class="row">
+    <section class="container text-white">
+        <div class="row py-5">
+            <div class="col-md-6">
+                <!--PERSONAGEM-->
+                <div class="row">
 
-                <div class="col-md-6">
-                    <img src="~/Images/@Html.DisplayFor(model => model.Image)" class="img-fluid character-img" />
-                </div>
+                    <div class="col-md-6">
+                        <img src="~/Images/@Html.DisplayFor(model => model.Image)" class="img-fluid character-img" />
+                    </div>
 
-                <div class="col-md-6">
+                    <div class="col-md-6">
 
-                    <h3 class="text-center">
-                        @Html.DisplayFor(model => model.Name)
-                    </h3>
+                        <h3 class="text-center">
+                            @Html.DisplayFor(model => model.Name)
+                        </h3>
 
-                    <p>
-                        <strong>@Html.DisplayNameFor(model => model.Level)</strong>
-                        @Html.DisplayFor(model => model.Level)
-                    </p>
-
-                    <p>
-                        <strong>@Html.DisplayNameFor(model => model.Experience)</strong>
-                        @Html.DisplayFor(model => model.Experience)
-                    </p>
-
-                    <p>
-                        <strong> @Html.DisplayNameFor(model => model.RankingPoints)</strong>
-                        @Html.DisplayFor(model => model.RankingPoints)
-                    </p>
-
-                    <p>
-                        <strong>@Html.DisplayNameFor(model => model.AttributePoints)</strong>
-                        @Html.DisplayFor(model => model.AttributePoints)
-                    </p>
-
-                </div>
-            </div>
-            <!--ATRBIUTOS-->
-            <div class="row">
-                <div class="col-md-12">
-                    <hr />
-
-                    <h3 class="my-4 text-center">Atributos</h3>
-
-                    <p>
-                        <strong>@Html.DisplayNameFor(model => model.LifePoints) </strong>
-                        @Html.DisplayFor(model => model.LifePoints)
-                    </p>
-
-                    @foreach (var item in Model.AttributesInCharacter)
-                    {
                         <p>
-                            <strong> @item.Proficiency.Name:</strong>
-                            @item.ProficiencyPoints
-
-                            @if (Model.AttributePoints > 0)
-                            {
-                                @Html.ActionLink("+", "AddAttributePointToAnCharacter", "Character", new { characterId = Model.CharacterId, attributeInCharacterId = item.AttributeInCharacterId }, new { @class = "btn btn-danger full-rounded mx-2" })
-                            }
+                            <strong>@Html.DisplayNameFor(model => model.Level)</strong>
+                            @Html.DisplayFor(model => model.Level)
                         </p>
-                    }
+
+                        <p>
+                            <strong>@Html.DisplayNameFor(model => model.Experience)</strong>
+                            @Html.DisplayFor(model => model.Experience)
+                        </p>
+
+                        <p>
+                            <strong> @Html.DisplayNameFor(model => model.RankingPoints)</strong>
+                            @Html.DisplayFor(model => model.RankingPoints)
+                        </p>
+
+                        <p>
+                            <strong>@Html.DisplayNameFor(model => model.AttributePoints)</strong>
+                            @Html.DisplayFor(model => model.AttributePoints)
+                        </p>
+
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- MOCHILA -->
+                <!--ATRBIUTOS-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr />
 
-        <div class="col-md-6">
-            <div class="row h-300">
-                <h3 class="col-md-12 text-center">Mochila</h3>
-                <p class="col-md-6 d-flex justify-content-center align-items-end">
-                    <img src="~/Images/Static/inventory.png" class="img-fluid h-150" />
-                    <strong>@Html.DisplayNameFor(model => model.Bag.slots)</strong>
-                    @Html.DisplayFor(model => model.Bag.slots)
-                </p>
-                <p class="col-md-6 d-flex justify-content-center align-items-end">
-                    <img src="~/Images/Static/coin.png" class="img-fluid profile-attributes-img" />
-                    <strong> @Html.DisplayNameFor(model => model.Coins)</strong>
-                    @Html.DisplayFor(model => model.Coins)
-                </p>
+                        <h3 class="my-4 text-center">ATRIBUTOS</h3>
 
-            </div>
+                        <p>
+                            <strong>@Html.DisplayNameFor(model => model.LifePoints) </strong>
+                            @Html.DisplayFor(model => model.LifePoints)
+                        </p>
 
-            <!-- ITENS DA MOCHILA -->
-            <div class="row d-flex justify-content-center align-items-center">
-                <div class="col-md-12">
-                    <hr />
-                    <h3 class="text-center" mb-3>Itens</h3>
-                    <div class="row my-4">
-                        @foreach (var item in Model.Bag.ItemsInBag)
+                        @foreach (var item in Model.AttributesInCharacter)
                         {
-                            if (item.Item != null)
-                            {
-                                <div class="col-md-4 item-box text-center m-4">
+                            <p>
+                                <strong> @item.Proficiency.Name:</strong>
+                                @item.ProficiencyPoints
 
-                                    <img src="~/Images/@item.Item.Image" class="table-img item-img" title="@item.Item.Description" />
-
-                                    <div class="item-description">
-
-                                        <h6 class="text-center py-2">@item.Item.Name</h6>
-
-                                        @if (item.Item.GetType() == typeof(RPGApplication.Models.Weapon))
-                                        {
-
-                                            RPGApplication.Models.Weapon weapon = (RPGApplication.Models.Weapon)item.Item;
-                                            <div>
-                                                <strong>DANO:</strong>
-                                                @weapon.Damage
-                                            </div>
-                                            <div>
-                                                <strong>CRÍTICO:</strong>
-                                                @weapon.Critical
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            RPGApplication.Models.Armour armour = (RPGApplication.Models.Armour)item.Item;
-                                            <div>
-                                                <strong>DEFESA:</strong>
-                                                @armour.Defense
-                                            </div>
-                                            <div>
-                                                <strong>EVASÃO:</strong>
-                                                @armour.Defense
-                                            </div>
-                                        }
-                                        <div>
-                                            <strong class="item-price">
-                                                @item.Item.Price Moedas
-                                            </strong>
-                                        </div>
-                                        <div class="mb-4">
-                                            <strong class="text-center item-rarity">@item.Item.ItemRarity.Name</strong>
-                                        </div>
-                                    </div>
-                                    @{
-                                        string equipped = "Equipar";
-
-                                        if (item.Equipped)
-                                        {
-                                            equipped = "Desequipar";
-                                        }
-                                    }
-                                    @Html.ActionLink(@equipped, "ManageItemInUse", "Character", new { ItemInBagId = @item.ItemInBagId }, new { @class = "btn btn-dark btn-block my-3" })
-                                    @Html.ActionLink("Vender", "SellItem", "Character", new { characterId = Model.CharacterId, ItemInBagId = @item.ItemInBagId }, new { @class = "btn btn-warning btn-block my-3" })
-                                </div>
-                            }
+                                @if (Model.AttributePoints > 0)
+                                {
+                                    @Html.ActionLink("+", "AddAttributePointToAnCharacter", "Characters", new { characterId = Model.CharacterId, attributeInCharacterId = item.AttributeInCharacterId }, new { @class = "btn btn-danger full-rounded mx-2" })
+                                }
+                            </p>
                         }
                     </div>
                 </div>
             </div>
+            <!-- MOCHILA -->
+
+            <div class="col-md-6">
+                <div class="row h-300 d-flex align-items-end">
+                    <h3 class="col-md-12 text-center">MOCHILA</h3>
+                    <p class="col-md-6 text-center">
+                        <img src="~/Images/Static/inventory.png" class="img-fluid h-150" />
+                        <strong>@Html.DisplayNameFor(model => model.Bag.slots) </strong>
+                        @Html.DisplayFor(model => model.Bag.slots)
+                    </p>
+                    <p class="col-md-6 text-center">
+                        <img src="~/Images/Static/coin.png" class="img-fluid h-90" />
+                        <strong> @Html.DisplayNameFor(model => model.Coins)</strong>
+                        @Html.DisplayFor(model => model.Coins)
+                    </p>
+
+                </div>
+
+                <!-- ITENS DA MOCHILA -->
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-md-12">
+                        <hr />
+                        <h3 class="text-center" mb-3>ITENS</h3>
+                        <div class="row my-4">
+                            @foreach (var item in Model.Bag.ItemsInBag)
+                            {
+                                if (item.Item != null)
+                                {
+                                    <div class="col-md-4 item-box text-center m-4">
+
+                                        <img src="~/Images/@item.Item.Image" class="table-img item-img" title="@item.Item.Description" />
+
+                                        <div class="item-description">
+
+                                            <h6 class="text-center py-2">@item.Item.Name</h6>
+
+                                            @if (item.Item.GetType() == typeof(RPGApplication.Models.Weapon))
+                                            {
+
+                                                RPGApplication.Models.Weapon weapon = (RPGApplication.Models.Weapon)item.Item;
+                                                <div>
+                                                    <strong>DANO:</strong>
+                                                    @weapon.Damage
+                                                </div>
+                                                <div>
+                                                    <strong>CRÍTICO:</strong>
+                                                    @weapon.Critical
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                RPGApplication.Models.Armour armour = (RPGApplication.Models.Armour)item.Item;
+                                                <div>
+                                                    <strong>DEFESA:</strong>
+                                                    @armour.Defense
+                                                </div>
+                                                <div>
+                                                    <strong>EVASÃO:</strong>
+                                                    @armour.Defense
+                                                </div>
+                                            }
+                                            <div>
+                                                <strong class="item-price">
+                                                    @item.Item.Price Moedas
+                                                </strong>
+                                            </div>
+                                            <div class="mb-4">
+                                                <strong class="text-center item-rarity">@item.Item.ItemRarity.Name</strong>
+                                            </div>
+                                        </div>
+                                        @{
+                                            string equipped = "Equipar";
+
+                                            if (item.Equipped)
+                                            {
+                                                equipped = "Desequipar";
+                                            }
+                                        }
+                                        @Html.ActionLink(@equipped, "ManageItemInUse", "Character", new { ItemInBagId = @item.ItemInBagId }, new { @class = "btn btn-dark btn-block my-3" })
+                                        @Html.ActionLink("Vender", "SellItem", "Character", new { characterId = Model.CharacterId, ItemInBagId = @item.ItemInBagId }, new { @class = "btn btn-warning btn-block my-3" })
+                                    </div>
+                                                }
+                                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 </section>

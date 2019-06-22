@@ -31,7 +31,18 @@ namespace RPGApplication.Models
 
         private int CombatDamageCalculator(Character attacker, Character attacked)
         {
-            return Convert.ToInt32(AttackWasDodged(attacked) ? (AttackHasCrit(attacker) * attacker.MakeAttack()) - attacked.MakeDefense() : 0);
+            return Convert.ToInt32(AttackWasDodged(attacked) ? 0 : BalanceAttackAndDefense(attacker, attacked));
+        }
+
+
+        private int BalanceAttackAndDefense(Character attacker, Character attacked) {
+
+            int firstAttack = (AttackHasCrit(attacker) * attacker.MakeAttack()) - attacked.MakeDefense();
+
+            if (firstAttack <= 0){
+               return Convert.ToInt32((attacked.MakeDefense() + 1) * 0.7);
+            }
+            return firstAttack;
         }
 
 

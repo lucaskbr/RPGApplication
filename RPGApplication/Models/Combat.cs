@@ -13,28 +13,30 @@ namespace RPGApplication.Models
         [Key]
         public int CombatId { get; set; }
 
-        public Character CharacterOne { get; set; }
+        [Display(Name = "Desafiante:")]
+        public Character Challanger { get; set; }
 
-        public Character CharacterTwo { get; set; }
+        [Display(Name = "Desafiado:")]
+        public Character Challanged { get; set; }
 
+        [Display(Name = "Ataques:")]
         public List<Attack> Attacks { get; set; }
 
+        [Display(Name = "Vencedor:")]
         public Character Winner { get; set; }
 
 
-        public Combat(Character characterOne, Character characterTwo, List<Attack> attacks, Character winner) {
-            this.CharacterOne = CharacterOne;
-            this.CharacterTwo = characterTwo;
+
+        public Combat() { }
+
+
+        public Combat(Character challanger, Character challanged, List<Attack> attacks, Character winner)
+        {
+            this.Challanger = challanger;
+            this.Challanged = challanged;
             this.Attacks = attacks;
             this.Winner = winner;
         }
-
-
-
-
-
-
-
-
+        
     }
 }

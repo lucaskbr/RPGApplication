@@ -14,11 +14,11 @@ namespace RPGApplication.Models
         public int BagId { get; set; }
 
         [Required]
-        [Display(Name = "Espaço:")]
+        [Display(Name = "ESPAÇO:")]
         public int slots { get; set; }
 
         [Required]
-        [Display(Name = "Itens:")]
+        [Display(Name = "ITENS:")]
         public List<ItemInBag> ItemsInBag { get; set; }
 
 

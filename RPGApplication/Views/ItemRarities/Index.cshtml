@@ -1,33 +1,64 @@
 ﻿@model IEnumerable<RPGApplication.Models.ItemRarity>
 
 @{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<section class="container-fluid">
+    <div class="row py-5 mx-2">
+        <div class="col-md-12">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
+            @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-dark my-3" })
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemRarityId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemRarityId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemRarityId })
-        </td>
-    </tr>
-}
+            <table class="table table-striped table-dark text-center">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th scope="col">
+                            Editar
+                        </th>
+                        <th scope="col">
+                            Detalhes
+                        </th>
+                        <th scope="col">
+                            Excluir
+                        </th>
+                    </tr>
+                <tbody>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
 
-</table>
+
+
+                            <td>
+                                <a href=@Url.Action("Edit", "ItemRarities", new { id = item.ItemRarityId  })>
+                                    <i class="fas fa-edit text-white font-19"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href=@Url.Action("Details", "ItemRarities", new { id = item.ItemRarityId })>
+                                    <i class="fas fa-search text-white font-19"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href=@Url.Action("Delete", "ItemRarities", new { id = item.ItemRarityId })>
+                                    <i class="fas fa-trash-alt text-white font-19"></i>
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>

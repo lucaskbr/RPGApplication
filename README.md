@@ -15,6 +15,10 @@ DAO Pattern.
 
 Entity Framework.
 
+Microsoft.Net.Http
+
 Vereyon.Web.FlashMessage.
+
+Newtonsoft.Json
 
 Bootstrap.

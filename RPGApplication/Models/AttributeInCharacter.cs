@@ -22,6 +22,13 @@ namespace RPGApplication.Models
 
         public AttributeInCharacter() { }
 
+        public AttributeInCharacter(Proficiency attributeInCharacter)
+        {
+            this.Proficiency = attributeInCharacter;
+            this.ProficiencyPoints = 0;
+        }
+
+
         public AttributeInCharacter(Proficiency attributeInCharacter, int proficiencyPoints)
         {
             this.Proficiency = attributeInCharacter;

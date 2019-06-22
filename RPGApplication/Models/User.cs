@@ -49,7 +49,7 @@ namespace RPGApplication.Models
         public Character Character { get; set; }
 
         [Required]
-        [Display(Name = "Senha:")]
+        [Display(Name = "Nível de acesso:")]
         [Range(0, 1, ErrorMessage = "O campo só pode conter o valor 0 ou 1")]
         public int AccessLevel { get; set; }
 

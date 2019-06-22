@@ -1,0 +1,35 @@
+﻿@model RPGApplication.Models.Character
+@{
+    ViewBag.Title = "GenerateCharacter";
+}
+
+<section class="container-fluid mh-90-vh bg-black" style="background-image: url(/Images/Static/generate_character.png); background-repeat: no-repeat; background-position: bottom right;">
+
+    <div class="flash-message">
+        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+    </div>
+
+    <section class="container">
+        <div class="row py-5">
+
+            <div class="col-md-12 d-flex justify-content-start align-items-center">
+
+
+                @using (Html.BeginForm("GenerateCharacter", "Characters", FormMethod.Post, new { @class = "col-md-12", enctype = "multipart/form-data" }))
+            {
+                    <h3 class="col-md-12 text-white mb-5">Gerar personagem</h3>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2 font-weight-bold text-white" })
+                        <div class="col-md-10">
+                            <input type="file" name="characterImage" class="text-white" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark mt-4 px-5">Enviar</button>
+                }
+            </div>
+
+        </div>
+    </section>
+</section>

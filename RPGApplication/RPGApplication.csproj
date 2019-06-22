@@ -45,14 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -86,6 +78,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -102,10 +104,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Vereyon.Web.FlashMessage, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vereyon.Web.FlashMessage.1.0.1\lib\net40\Vereyon.Web.FlashMessage.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -148,8 +146,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArmoursController.cs" />
-    <Compile Include="Controllers\CharacterController.cs" />
-    <Compile Include="Controllers\CombatesController.cs" />
+    <Compile Include="Controllers\CharactersController.cs" />
+    <Compile Include="Controllers\CombatsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemRaritiesController.cs" />
     <Compile Include="Controllers\ProficienciesController.cs" />
@@ -159,6 +157,7 @@
     <Compile Include="DAL\AttributeInCharacterDAO.cs" />
     <Compile Include="DAL\BagDAO.cs" />
     <Compile Include="DAL\CharacterDAO.cs" />
+    <Compile Include="DAL\CombatDAO.cs" />
     <Compile Include="DAL\ContextSingleton.cs" />
     <Compile Include="DAL\ItemDAO.cs" />
     <Compile Include="DAL\ItemInBagDAO.cs" />
@@ -169,11 +168,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906041819015_1.cs" />
-    <Compile Include="Migrations\201906041819015_1.Designer.cs">
-      <DependentUpon>201906041819015_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Armour.cs" />
     <Compile Include="Models\Attack.cs" />
     <Compile Include="Models\AttributeInCharacter.cs" />
@@ -184,10 +178,12 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemInBag.cs" />
     <Compile Include="Models\ItemRarity.cs" />
+    <Compile Include="Models\Joke.cs" />
     <Compile Include="Models\Proficiency.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VerifyAccessLevel.cs" />
     <Compile Include="Models\VerifyAuthentication.cs" />
+    <Compile Include="Models\VerifyCharacterCreated.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\FileUploadHandling.cs" />
@@ -201,11 +197,6 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Characters\Create.cshtml" />
-    <Content Include="Views\Characters\Delete.cshtml" />
-    <Content Include="Views\Characters\Details.cshtml" />
-    <Content Include="Views\Characters\Edit.cshtml" />
-    <Content Include="Views\Characters\Index.cshtml" />
     <Content Include="Views\Armours\Create.cshtml" />
     <Content Include="Views\Armours\Delete.cshtml" />
     <Content Include="Views\Armours\Details.cshtml" />
@@ -234,11 +225,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Market.cshtml" />
-    <Content Include="Views\Combats\Create.cshtml" />
-    <Content Include="Views\Combats\Delete.cshtml" />
-    <Content Include="Views\Combats\Details.cshtml" />
-    <Content Include="Views\Combats\Edit.cshtml" />
-    <Content Include="Views\Combats\Index.cshtml" />
+    <Content Include="Views\Home\GenerateCharacter.cshtml" />
+    <Content Include="Views\Home\Ranking.cshtml" />
+    <Content Include="Views\Home\CharacterDetails.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Combats\CombatHistory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -251,16 +244,10 @@
     <Folder Include="Images\Armours\" />
     <Folder Include="Images\Characters\" />
     <Folder Include="Images\Weapons\" />
-    <Folder Include="Views\Character\" />
-    <Folder Include="Views\Combates\" />
+    <Folder Include="Views\Characters\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906041819015_1.resx">
-      <DependentUpon>201906041819015_1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -294,6 +281,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

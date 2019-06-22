@@ -24,11 +24,11 @@ namespace RPGApplication.Models
         [Key]
         public int CharacterId { get; set; }
 
-        [Display(Name = "Imagem:")]
+        [Display(Name = "IMAGEM:")]
         public string Image { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Nome:")]
+        [Display(Name = "NOME:")]
         [MinLength(5, ErrorMessage = "O campo deve ser preenchido com no minimo 5 caracteres")]
         [MaxLength(30)]
         public string Name { get; set; }
@@ -38,32 +38,31 @@ namespace RPGApplication.Models
         public int LifePoints { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Level:")]
+        [Display(Name = "LEVEL:")]
         public int Level { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Experiência:")]
+        [Display(Name = "EXPERIÊNCIA:")]
         public double Experience { get; set; }
 
-        [Display(Name = "Pontos de atributo:")]
+        [Display(Name = "PONTOS DE ATRIBUTO:")]
         public int AttributePoints { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Atributos:")]
+        [Display(Name = "ATRIBUTOS:")]
         public List<AttributeInCharacter> AttributesInCharacter { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Mochila:")]
+        [Display(Name = "MOCHILA:")]
         public Bag Bag { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Moedas:")]
+        [Display(Name = "MOEDAS:")]
         public int Coins { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Pontos de ranking:")]
+        [Display(Name = "HONRA:")]
         public int RankingPoints { get; set; }
-
 
         public Character()
         {
@@ -82,14 +81,7 @@ namespace RPGApplication.Models
             this.Bag = bag;
             this.Coins = 100;
             this.RankingPoints = -1;
-
         }
-
-
-        /* public int GetBonusFromAttribute()
-         {
-             //return GetDamageOfWeaponsEquipped();
-         }*/
 
         public int GetBonusFromAttribute(Proficiency proficiency)
         {

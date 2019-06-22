@@ -1,0 +1,61 @@
+﻿@model IEnumerable<RPGApplication.Models.Combat>
+
+@{
+    ViewBag.Title = "ListCombats";
+}
+
+<section class="container-fluid bg-black">
+
+
+
+    <section class="container mh-90-vh d-flex align-items-end" style="background-image: url(/Images/Static/combat_history.png);background-position: center;background-repeat: no-repeat;">
+        <div class="col-md-12 text-center">
+            <h2 class="py-5 text-white shadow-white">Combates</h2>
+            <p class="text-white font-italic font-18 shadow-white">
+                Olá viajante, deseja recordar suas batalhas?
+            </p>
+        </div>
+    </section>
+
+
+    <section class="container">
+        <div class="row py-5">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-12 ranking-card py-3 px-5 my-2">
+                    <div class="row d-flex align-items-center">
+
+                        <div class="col-md-12 d-flex justify-content-start">
+
+                            <div class="row d-flex align-items-center">
+
+                                <div class="col-md-12 py-1 text-white">
+                                    <strong>@Html.DisplayNameFor(model => model.Challanger)</strong>
+                                    @Html.DisplayFor(modelItem => item.Challanger.Name)
+                                </div>
+                                <div class="col-md-12 py-1 text-white">
+                                    <strong>@Html.DisplayNameFor(model => model.Challanged)</strong>
+                                    @Html.DisplayFor(modelItem => item.Challanged.Name)
+                                </div>
+
+                                <div class="col-md-12 py-1 text-white">
+                                    <strong>@Html.DisplayNameFor(model => model.Winner)</strong>
+                                    @Html.DisplayFor(modelItem => item.Winner.Name)
+                                </div>
+                                <div class="col-md-12">
+                                    @foreach (var attack in item.Attacks)
+                                    {
+                                        <h6 class="col-md-6 py-1 text-white">Atacante: @attack.Attacker.Name</h6>
+                                            <h6 class="col-md-6 py-1 text-white">Dano: @attack.DamageDone</h6>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</section>

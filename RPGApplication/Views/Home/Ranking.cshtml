@@ -1,0 +1,77 @@
+﻿@model IEnumerable<RPGApplication.Models.Character>
+
+@{
+    ViewBag.Title = "Ranking";
+}
+
+
+
+
+
+
+<section class="container-fluid bg-black">
+
+    <div class="flash-message">
+        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+    </div>
+
+    <section class="container mh-90-vh d-flex align-items-end" style="background-image: url(/Images/Static/ranking.png);background-position: center;background-repeat: no-repeat;">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="py-5 text-white shadow-white">Ranking</h2>
+                <p class="text-white font-italic font-18 shadow-white">
+                    Olá viajante, realize combates para obter recompensas e subir no ranking. Caso você chegue no topo, talvez eu lhe de a oportunidade para me desafiar em combate!
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="container">
+        <div class="row py-5">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-12 ranking-card py-3 px-5 my-2">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <img src="~/Images/@Html.DisplayFor(modelItem => item.Image)" class="img-fluid h-150" />
+                        </div>
+
+                        <div class="col-md-4 d-flex justify-content-start">
+
+                            <div class="row d-flex align-items-center">
+                                <h3 class="col-md-12 py-1 text-red">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </h3>
+                                <div class="col-md-12 py-1 text-white">
+                                    <strong>@Html.DisplayNameFor(model => model.LifePoints)</strong>
+                                    @Html.DisplayFor(modelItem => item.LifePoints)
+                                </div>
+                                <div class="col-md-12 py-1 text-white">
+                                    <strong>@Html.DisplayNameFor(model => model.Level)</strong>
+                                    @Html.DisplayFor(modelItem => item.Level)
+                                </div>
+
+                                <div class="col-md-12 py-1 text-white">
+                                    <strong>@Html.DisplayNameFor(model => model.RankingPoints)</strong>
+                                    @Html.DisplayFor(modelItem => item.RankingPoints)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row  d-flex justify-content-center align-items-center">
+                                @Html.ActionLink("Ver mais", "CharacterDetails", "Home", new { characterId = item.CharacterId }, new { @class = "btn btn-dark btn-block mx-1" })
+                                @Html.ActionLink("Atacar", "AttackCharacter", "Combats", new { characterId = item.CharacterId }, new { @class = "btn btn-danger btn-block mx-1" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </section>
+</section>

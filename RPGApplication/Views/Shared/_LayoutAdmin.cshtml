@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - RPGApplication</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-red">
+
+        <a class="navbar-brand" href="#">
+            <img src="/Images/Static/dice.png" class="img-fluid brand-logo" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Users/">Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Weapons/">Armas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Armours/">Armaduras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Proficiencies/">Proficiencias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ItemRarities/">Raridade de Itens</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/">Jogar</a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("LogOff", "LogOff", "Home", null, new { @class = "nav-link" })
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="body-content">
+        @RenderBody()
+    </section>
+
+
+    <script src="~/scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/scripts/popper.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
