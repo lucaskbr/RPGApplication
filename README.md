@@ -1,4 +1,7 @@
 # RPGApplication
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/937dbb9687564a638176a4fea0886ce3)](https://app.codacy.com/app/lucaskbr/RPGApplication?utm_source=github.com&utm_medium=referral&utm_content=lucaskbr/RPGApplication&utm_campaign=Badge_Grade_Settings)
+
 A simple RPGApplication
 
 
